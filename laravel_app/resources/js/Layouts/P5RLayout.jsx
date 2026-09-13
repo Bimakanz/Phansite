@@ -33,7 +33,8 @@ const NOW_PLAYING_CHARS = [
 ];
 
 export default function P5RLayout({ children }) {
-    const { url } = usePage();
+    const { url, props } = usePage();
+    const user = props?.auth?.user;
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [trackIndex, setTrackIndex] = useState(0);
@@ -191,6 +192,17 @@ export default function P5RLayout({ children }) {
                                 <CutoutWord word={link.word} />
                             </Link>
                         ))}
+                        {user && (
+                            <Link
+                                href="/admin"
+                                className={`nav-tab-btn ${url.startsWith('/admin') ? 'is-active' : ''}`}
+                                title="ADMIN PALACE"
+                                onClick={() => audioEngine.playSfx('tab')}
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <CutoutWord word="ADMIN" />
+                            </Link>
+                        )}
                     </nav>
                 </div>
             </header>

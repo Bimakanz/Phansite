@@ -1,14 +1,15 @@
 <?php
 
-namespace Database\Seeders;
-
 use App\Models\User;
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Hash;
 
-class AdminUserSeeder extends Seeder
+return new class extends Migration
 {
-    public function run(): void
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         User::updateOrCreate(
             ['email' => 'admin@phantom.test'],
@@ -28,4 +29,12 @@ class AdminUserSeeder extends Seeder
             ]
         );
     }
-}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};

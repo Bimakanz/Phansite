@@ -37,7 +37,7 @@ Route::get('/contact', function (\Illuminate\Http\Request $request) {
 Route::post('/contact', [CallingCardController::class, 'store'])->name('contact.send');
 
 // ─── Admin Routes (Auth Protected) ─────────────────────────────────────────
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // Projects CRUD
