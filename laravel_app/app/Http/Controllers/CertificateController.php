@@ -41,11 +41,18 @@ class CertificateController extends Controller
             $imagePath = ImageOptimizer::storeAsWebp($request->file('image_file'), 'certificates');
         }
 
-        Certificate::create(array_merge($validated, [
-            'image_path' => $imagePath,
-            'arcana'     => $validated['arcana'] ?? 'STAR',
-            'order'      => $validated['order'] ?? 0,
-        ]));
+        unset($validated['image_file']);
+
+        try {
+            Certificate::create(array_merge($validated, [
+                'image_path' => $imagePath,
+                'arcana'     => $validated['arcana'] ?? 'STAR',
+                'order'      => $validated['order'] ?? 0,
+            ]));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Certificate store error: ' . $e->getMessage());
+            return back()->withErrors(['title' => 'Gagal menyimpan certificate: ' . $e->getMessage()])->withInput();
+        }
 
         return redirect()->route('admin.certificates.index')->with('success', 'Certificate recorded into the Metaverse Archive!');
     }
@@ -76,7 +83,14 @@ class CertificateController extends Controller
             $validated['image_path'] = ImageOptimizer::storeAsWebp($request->file('image_file'), 'certificates');
         }
 
-        $certificate->update($validated);
+        unset($validated['image_file']);
+
+        try {
+            $certificate->update($validated);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Certificate update error: ' . $e->getMessage());
+            return back()->withErrors(['title' => 'Gagal memperbarui certificate: ' . $e->getMessage()])->withInput();
+        }
 
         return redirect()->route('admin.certificates.index')->with('success', 'Certificate successfully updated!');
     }

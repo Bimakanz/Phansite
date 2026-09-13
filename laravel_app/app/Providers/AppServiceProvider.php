@@ -26,5 +26,13 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production') || request()->header('x-forwarded-proto') === 'https') {
             URL::forceScheme('https');
         }
+
+        try {
+            if (!file_exists(public_path('storage'))) {
+                \Illuminate\Support\Facades\Artisan::call('storage:link');
+            }
+        } catch (\Throwable $e) {
+            // Silently pass if symlink is not permitted in this environment
+        }
     }
 }

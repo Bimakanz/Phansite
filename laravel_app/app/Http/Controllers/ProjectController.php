@@ -55,7 +55,14 @@ class ProjectController extends Controller
             $imagePath = ImageOptimizer::storeAsWebp($request->file('image_file'), 'projects');
         }
 
-        Project::create(array_merge($validated, ['image_path' => $imagePath]));
+        unset($validated['image_file']);
+
+        try {
+            Project::create(array_merge($validated, ['image_path' => $imagePath]));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Project store error: ' . $e->getMessage());
+            return back()->withErrors(['title' => 'Gagal menyimpan project: ' . $e->getMessage()])->withInput();
+        }
 
         return redirect()->route('admin.projects.index')->with('success', 'Project created!');
     }
@@ -93,7 +100,14 @@ class ProjectController extends Controller
             $validated['image_path'] = ImageOptimizer::storeAsWebp($request->file('image_file'), 'projects');
         }
 
-        $project->update($validated);
+        unset($validated['image_file']);
+
+        try {
+            $project->update($validated);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Project update error: ' . $e->getMessage());
+            return back()->withErrors(['title' => 'Gagal memperbarui project: ' . $e->getMessage()])->withInput();
+        }
 
         return redirect()->route('admin.projects.index')->with('success', 'Project updated!');
     }
