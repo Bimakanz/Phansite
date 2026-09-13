@@ -201,7 +201,7 @@ export default function Contact({ remainingQuota = 3 }) {
                                         onClick={() => handleTabSwitch('preview')}
                                         onMouseEnter={handleHover}
                                     >
-                                        👁 LIVE CARD
+                                        LIVE CARD
                                     </button>
                                 </div>
                             )}

@@ -4046,10 +4046,15 @@ html, body {
   .portfolio-hero-banner {
     padding: 1.6rem 1rem 2.2rem;
     margin: 1rem auto 1.5rem;
+    transform: none !important; /* Straightened for balanced mobile screen */
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .hero-banner-inner {
     flex-direction: column;
     gap: 1.5rem;
+    transform: none !important; /* Unskew inner text */
+    width: 100% !important;
   }
   .hero-dev-title {
     font-size: clamp(1.6rem, 7vw, 2.3rem);
@@ -4079,12 +4084,12 @@ html, body {
     font-size: 0.95rem;
   }
 
-  /* Slanted Poll Banner - Mobile Compact & Centered */
+  /* Slanted Poll Banner - Mobile Compact, Centered & Straightened */
   .poll-banner-slant-wrapper {
     width: 100% !important;
-    max-width: 400px !important;
+    max-width: 380px !important;
     margin: 1.5rem auto 2rem auto !important;
-    padding: 0 1rem !important;
+    padding: 0 0.8rem !important;
     box-sizing: border-box !important;
     overflow: visible !important;
     transform: none !important;
@@ -4094,7 +4099,7 @@ html, body {
     max-width: 100% !important;
     box-sizing: border-box !important;
     margin: 0 auto !important;
-    transform: none !important;
+    transform: none !important; /* 100% Straight, no tilt */
     padding: 1.3rem 1rem 1.2rem !important;
     border: 2.5px solid #ffffff !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9) !important;
@@ -4170,6 +4175,17 @@ html, body {
     min-width: 0;
     padding: 0.5rem 0.5rem !important;
     min-height: 44px !important;
+    transform: none !important; /* Straight rectangular buttons on mobile */
+    box-shadow: 4px 4px 0 #111111, 5px 5px 0 #ffffff !important;
+  }
+  .poll-buttons-boxed-row .btn-p5-3d:hover,
+  .poll-buttons-boxed-row .btn-p5-3d:active,
+  .poll-buttons-boxed-row .btn-p5-3d.is-selected {
+    transform: none !important;
+  }
+  .poll-buttons-boxed-row .btn-3d-text,
+  .poll-buttons-boxed-row .btn-3d-sub {
+    transform: none !important;
   }
   .btn-3d-text {
     font-size: 1.15rem !important;
@@ -4189,7 +4205,7 @@ html, body {
     letter-spacing: 1px !important;
   }
 
-  /* Comments Strip */
+  /* Comments Strip - Straightened on Mobile */
   .comment-input-strip-wrapper {
     flex-direction: column;
     align-items: stretch;
@@ -4203,12 +4219,16 @@ html, body {
     transform: none !important;
     width: 100%;
   }
+  .comment-input-field {
+    transform: none !important;
+  }
   .comment-submit-col {
     width: 100%;
     justify-content: space-between;
     align-items: center;
   }
   .btn-p5-send {
+    transform: none !important;
     flex: 1;
     margin-left: 1rem;
     text-align: center;
@@ -4223,7 +4243,14 @@ html, body {
   }
   .comment-bubble-box {
     padding: 0.8rem 1rem;
-    transform: none;
+    transform: none !important;
+  }
+  .comment-bubble-card-white {
+    transform: none !important;
+    padding: 0.8rem 1rem !important;
+  }
+  .comment-bubble-text {
+    transform: none !important;
   }
 }
 
