@@ -471,7 +471,7 @@ export default function HomePage({ latestProjects = [], pollData = {}, initialCo
                                 <div className="poll-q-title-row">
                                     <span className="poll-giant-q">Q</span>
                                     <div className="poll-q-text-group">
-                                        <h2 className="poll-question-text" style={{ fontSize: '2.4rem', letterSpacing: '0.04em' }}>
+                                        <h2 className="poll-question-text">
                                             DO YOU AMAZED BY<br />
                                             THIS WEBSITE?
                                         </h2>
@@ -493,19 +493,6 @@ export default function HomePage({ latestProjects = [], pollData = {}, initialCo
                                         <div className="poll-bar-slanted-fill" style={{ width: `${pollPercent}%` }}></div>
                                     </div>
                                     <span className="poll-label-no">NO ({pollStats.no})</span>
-                                </div>
-
-                                <div className="poll-thanks-subtext">
-                                    {voted ? (
-                                        <span>
-                                            TOTAL VERDICTS LOGGED IN METAVERSE ARCHIVE: <strong>{pollStats.total}</strong>
-                                        </span>
-                                    ) : (
-                                        <span>
-                                            CAST YOUR VERDICT TO REGISTER YOUR COGNITION.<br />
-                                            TOTAL VERDICTS LOGGED: <strong>{pollStats.total}</strong>
-                                        </span>
-                                    )}
                                 </div>
 
                                 <div className="poll-buttons-boxed-row">
