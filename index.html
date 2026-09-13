@@ -23,39 +23,68 @@
       <nav class="main-nav" aria-label="Main Navigation">
         
         <!-- HOME Cutout Tiles -->
-        <button class="nav-tab-btn is-active" data-tab="home" id="tab-btn-home" onclick="phansiteApp.switchTab('home')">
+        <button class="nav-tab-btn is-active" data-tab="home" id="tab-btn-home" onclick="phansiteApp.switchTab('home')" title="Home">
           <span class="c-tile">H</span>
           <span class="c-tile">O</span>
           <span class="c-tile">M</span>
           <span class="c-tile">E</span>
         </button>
 
-        <!-- REQUESTS Cutout Tiles -->
-        <button class="nav-tab-btn" data-tab="requests" id="tab-btn-requests" onclick="phansiteApp.switchTab('requests')">
-          <span class="c-tile">R</span>
-          <span class="c-tile">E</span>
-          <span class="c-tile">Q</span>
+        <!-- ABOUT Cutout Tiles -->
+        <button class="nav-tab-btn" data-tab="about" id="tab-btn-about" onclick="phansiteApp.switchTab('about')" title="About Me">
+          <span class="c-tile">A</span>
+          <span class="c-tile">B</span>
+          <span class="c-tile">O</span>
           <span class="c-tile">U</span>
+          <span class="c-tile">T</span>
+        </button>
+
+        <!-- PROJECTS Cutout Tiles (Replaces Requests) -->
+        <button class="nav-tab-btn" data-tab="projects" id="tab-btn-projects" onclick="phansiteApp.switchTab('projects')" title="Projects">
+          <span class="c-tile">P</span>
+          <span class="c-tile">R</span>
+          <span class="c-tile">O</span>
+          <span class="c-tile">J</span>
           <span class="c-tile">E</span>
-          <span class="c-tile">S</span>
+          <span class="c-tile">C</span>
           <span class="c-tile">T</span>
           <span class="c-tile">S</span>
         </button>
 
-        <!-- CHATS Cutout Tiles -->
-        <button class="nav-tab-btn" data-tab="chats" id="tab-btn-chats" onclick="phansiteApp.switchTab('chats')">
+        <!-- EXPERIENCE Cutout Tiles (Replaces Chats) -->
+        <button class="nav-tab-btn" data-tab="experience" id="tab-btn-experience" onclick="phansiteApp.switchTab('experience')" title="Experience">
+          <span class="c-tile">E</span>
+          <span class="c-tile">X</span>
+          <span class="c-tile">P</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">R</span>
+          <span class="c-tile">I</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">N</span>
           <span class="c-tile">C</span>
-          <span class="c-tile">H</span>
-          <span class="c-tile">A</span>
+          <span class="c-tile">E</span>
+        </button>
+
+        <!-- CONTACT Cutout Tiles -->
+        <button class="nav-tab-btn" data-tab="contact" id="tab-btn-contact" onclick="phansiteApp.switchTab('contact')" title="Calling Card">
+          <span class="c-tile">C</span>
+          <span class="c-tile">O</span>
+          <span class="c-tile">N</span>
           <span class="c-tile">T</span>
-          <span class="c-tile">S</span>
+          <span class="c-tile">A</span>
+          <span class="c-tile">C</span>
+          <span class="c-tile">T</span>
         </button>
 
       </nav>
 
-      <!-- Right Controls: Settings & Joker Mask Avatar -->
+      <!-- Right Controls: Admin CMS Button, Settings & Joker Mask Avatar -->
       <div class="header-user-controls">
-        <button class="btn-header-icon" id="btn-open-settings" onclick="phansiteApp.openSettingsModal()" title="Settings">
+        <button class="btn-admin-access" id="btn-open-admin" onclick="phansiteAdmin.openAdminModal()" title="Admin Cognitive CMS">
+          ★ ADMIN CMS
+        </button>
+
+        <button class="btn-header-icon" id="btn-open-settings" onclick="phansiteApp.openSettingsModal()" title="Audio & Settings">
           ⚙
         </button>
         
@@ -76,6 +105,42 @@
          ==================================================================== -->
     <section id="section-home" class="app-section">
       
+      <!-- PORTFOLIO HERO INTRO BANNER (BIMASENA // FULL-STACK THIEF) -->
+      <div class="portfolio-hero-banner">
+        <div class="hero-banner-inner">
+          <div class="hero-text-block">
+            <span class="hero-role-tag">★ COGNITIVE INFILTRATOR &amp; CREATIVE DEVELOPER</span>
+            <h1 class="hero-dev-title">BIMASENA // FULL-STACK THIEF</h1>
+            <p class="hero-dev-tagline">
+              Stealing hearts through high-performance web applications, bespoke reactive architecture, and stunning Persona 5 Neo-Brutalist UI/UX. Transforming distorted bugs into pure digital craftsmanship.
+            </p>
+            <div class="hero-actions-row">
+              <button class="btn-p5-hero" onclick="phansiteApp.switchTab('projects')" title="View Projects">
+                <span>TARGETS (PROJECTS)</span> ➔
+              </button>
+              <button class="btn-p5-hero btn-secondary" onclick="phansiteApp.downloadResume()" title="Steal Resume">
+                <span>STEAL RESUME</span> 📄
+              </button>
+              <button class="btn-p5-hero btn-secondary" onclick="phansiteApp.switchTab('contact')" title="Send Calling Card">
+                <span>DISPATCH CALLING CARD</span> ✉
+              </button>
+            </div>
+          </div>
+
+          <!-- Animated Phansite Approval Rating Widget -->
+          <div class="hero-approval-widget">
+            <div class="approval-widget-header">
+              <span>PHANSITE APPROVAL RATING</span>
+              <span>★ MAX</span>
+            </div>
+            <div class="approval-stat-number" id="hero-approval-number">98%</div>
+            <div class="approval-progress-track">
+              <div class="approval-progress-fill" id="hero-approval-fill" style="width: 98%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- The Giant Diagonal Black Poll Banner -->
       <div class="poll-banner-slant-wrapper">
         <div class="poll-banner-black-strip">
@@ -294,75 +359,232 @@
     </section>
 
     <!-- ====================================================================
-         SECTION 2: REQUESTS (MEMENTOS TARGET TABLE)
+         SECTION 2: ABOUT ME (PHANTOM PARAMETERS)
          ==================================================================== -->
-    <section id="section-requests" class="app-section is-hidden">
+    <section id="section-about" class="app-section is-hidden">
       
       <div class="section-header-row">
         <h2 class="section-title-cutout">
-          <span class="c-tile">R</span>
-          <span class="c-tile">E</span>
-          <span class="c-tile">Q</span>
+          <span class="c-tile">A</span>
+          <span class="c-tile">B</span>
+          <span class="c-tile">O</span>
           <span class="c-tile">U</span>
-          <span class="c-tile">E</span>
-          <span class="c-tile">S</span>
           <span class="c-tile">T</span>
-          <span class="c-tile">S</span>
         </h2>
-        <button class="btn-p5-send" onclick="phansiteRequests.openNewTargetModal()">
-          + REPORT TARGET
-        </button>
+        <span class="chat-live-badge">★ PHANTOM PARAMETERS</span>
       </div>
 
-      <div class="requests-table-container">
-        <table class="p5-table">
-          <thead>
-            <tr>
-              <th style="width: 50px;">#</th>
-              <th>TARGET</th>
-              <th>CRIME / TITLE</th>
-              <th>STATUS</th>
-              <th style="text-align: right;">VOTES</th>
-            </tr>
-          </thead>
-          <tbody id="requests-table-body">
-            <!-- Rendered by requests.js -->
-          </tbody>
-        </table>
+      <div class="portfolio-hero-banner" style="margin-top: 1rem;">
+        <div class="hero-banner-inner">
+          <div class="hero-text-block">
+            <h3 style="font-family: var(--font-p5-menu); font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem;">
+              COGNITIVE PROFILE // BIMASENA
+            </h3>
+            <p style="font-family: var(--font-p5-sans); color: #ccc; line-height: 1.6; font-size: 1.05rem;">
+              A passionate Full-Stack Software Engineer operating from the Metaverse shadows. Armed with an eye for uncompromising visual aesthetics and deep architectural discipline, I build reactive web applications, craft fluid micro-interactions, and design resilient backends.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parameters Grid (Social Stats Inspired) -->
+      <div class="about-parameters-grid">
+        
+        <!-- Knowledge (Frontend) -->
+        <div class="parameter-card">
+          <div class="parameter-header">
+            <h3 class="parameter-title">KNOWLEDGE</h3>
+            <span class="parameter-stars">★★★★★</span>
+          </div>
+          <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700;">FRONTEND ARCHITECTURE</p>
+          <ul class="parameter-items-list">
+            <li>React.js / Next.js Frameworks</li>
+            <li>Modern JavaScript (ES6+) &amp; TypeScript</li>
+            <li>Tailwind CSS &amp; Neo-Brutalist Styling</li>
+            <li>Responsive UI &amp; Animation Orchestration</li>
+            <li>Web Audio API &amp; State Management</li>
+          </ul>
+        </div>
+
+        <!-- Guts (Backend) -->
+        <div class="parameter-card">
+          <div class="parameter-header">
+            <h3 class="parameter-title">GUTS</h3>
+            <span class="parameter-stars">★★★★★</span>
+          </div>
+          <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700;">BACKEND &amp; SERVERS</p>
+          <ul class="parameter-items-list">
+            <li>Laravel &amp; PHP Ecosystem</li>
+            <li>Node.js / Express.js REST APIs</li>
+            <li>PostgreSQL, MySQL &amp; Redis Caching</li>
+            <li>Authentication &amp; Role Security</li>
+            <li>WebSocket Real-Time Systems</li>
+          </ul>
+        </div>
+
+        <!-- Proficiency (Tools) -->
+        <div class="parameter-card">
+          <div class="parameter-header">
+            <h3 class="parameter-title">PROFICIENCY</h3>
+            <span class="parameter-stars">★★★★☆</span>
+          </div>
+          <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700;">ENGINEERING &amp; DEVOPS</p>
+          <ul class="parameter-items-list">
+            <li>Git / GitHub Workflow &amp; CI/CD</li>
+            <li>Vite, Webpack &amp; Build Tools</li>
+            <li>Docker Containerization</li>
+            <li>API Design &amp; Integration Testing</li>
+            <li>Web Performance &amp; SEO Optimization</li>
+          </ul>
+        </div>
+
+        <!-- Charm (Design & Soft Skills) -->
+        <div class="parameter-card">
+          <div class="parameter-header">
+            <h3 class="parameter-title">CHARM</h3>
+            <span class="parameter-stars">★★★★★</span>
+          </div>
+          <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700;">UI/UX &amp; COLLABORATION</p>
+          <ul class="parameter-items-list">
+            <li>Persona 5 &amp; Neo-Brutalist Visual Direction</li>
+            <li>Figma Wireframing &amp; Prototyping</li>
+            <li>Agile Methodology &amp; Pair Programming</li>
+            <li>Design System Creation</li>
+            <li>User Empathy &amp; Creative Problem Solving</li>
+          </ul>
+        </div>
+
       </div>
 
     </section>
 
     <!-- ====================================================================
-         SECTION 3: CHATS (FORUM / DISCUSSION ROOM)
+         SECTION 3: PROJECTS (MISSION TARGETS)
          ==================================================================== -->
-    <section id="section-chats" class="app-section is-hidden">
+    <section id="section-projects" class="app-section is-hidden">
       
-      <div class="chat-layout-grid">
-        <aside class="chat-sidebar-card">
-          <h2 class="chat-sidebar-title">CHANNELS</h2>
-          <button class="chat-channel-btn is-active" data-channel="general" onclick="switchChatChannel('general', this)"># general-shibuya</button>
-          <button class="chat-channel-btn" data-channel="requests-chat" onclick="switchChatChannel('requests-chat', this)"># target-reports</button>
-          <button class="chat-channel-btn" data-channel="mementos-theories" onclick="switchChatChannel('mementos-theories', this)"># mementos-subway</button>
-        </aside>
-
-        <div class="chat-main-view">
-          <div class="chat-view-header">
-            <span id="chat-channel-display"># general-shibuya</span>
-            <span class="chat-live-badge">● LIVE DISCUSSIONS</span>
-          </div>
-
-          <div class="chat-messages-scroll" id="chat-messages-container">
-            <!-- Messages rendered by chat.js -->
-          </div>
-
-          <div class="chat-input-area">
-            <form class="chat-form" id="chat-form" onsubmit="handleChatSubmit(event)">
-              <input type="text" class="chat-input-text" id="chat-input-text" placeholder="Type your comment to the Aficionados..." maxlength="280" />
-              <button type="submit" class="btn-chat-send">SEND</button>
-            </form>
-          </div>
+      <div class="projects-header-bar">
+        <h2 class="section-title-cutout">
+          <span class="c-tile">P</span>
+          <span class="c-tile">R</span>
+          <span class="c-tile">O</span>
+          <span class="c-tile">J</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">C</span>
+          <span class="c-tile">T</span>
+          <span class="c-tile">S</span>
+        </h2>
+        <div style="display: flex; gap: 0.8rem;">
+          <button class="btn-p5-send" onclick="phansiteAdmin.openAdminModal()">
+            + ISSUE TARGET (ADMIN)
+          </button>
         </div>
+      </div>
+
+      <!-- Empty State (Conditional render if projects.length === 0) -->
+      <div id="public-projects-empty" class="p5-empty-state is-hidden">
+        <div class="empty-state-icon">☠</div>
+        <h3 class="empty-state-text">NO TARGETS AVAILABLE.</h3>
+        <p class="empty-state-subtext">The Metaverse is quiet... No requests on the Phansite right now. Launch the Admin CMS to dispatch a new target!</p>
+        <button class="btn-p5-hero" onclick="phansiteAdmin.openAdminModal()">
+          OPEN ADMIN CMS
+        </button>
+      </div>
+
+      <!-- Populated State Grid -->
+      <div id="public-projects-grid" class="projects-grid-container">
+        <!-- Rendered dynamically by app.js from store.js -->
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         SECTION 4: EXPERIENCE & CONFIDANTS
+         ==================================================================== -->
+    <section id="section-experience" class="app-section is-hidden">
+      
+      <div class="section-header-row">
+        <h2 class="section-title-cutout">
+          <span class="c-tile">E</span>
+          <span class="c-tile">X</span>
+          <span class="c-tile">P</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">R</span>
+          <span class="c-tile">I</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">N</span>
+          <span class="c-tile">C</span>
+          <span class="c-tile">E</span>
+        </h2>
+        <button class="btn-p5-send" onclick="phansiteAdmin.openAdminModal()">
+          + MANAGE CONFIDANTS
+        </button>
+      </div>
+
+      <!-- Experience Timeline -->
+      <h3 style="font-family: var(--font-p5-menu); font-size: 2rem; color: #fff; margin: 1.5rem 0 0.5rem;">
+        CAREER CONFIDANT ARCHIVE
+      </h3>
+      <div id="public-experience-timeline" class="experience-timeline">
+        <!-- Rendered dynamically by app.js from store.js -->
+      </div>
+
+      <!-- Certifications & Competency (Confidant Tarot Cards) -->
+      <h3 style="font-family: var(--font-p5-menu); font-size: 2rem; color: #fff; margin: 2.5rem 0 0.5rem;">
+        COMPETENCY &amp; CERTIFICATIONS
+      </h3>
+      <div id="public-certifications-grid" class="certifications-grid">
+        <!-- Rendered dynamically by app.js from store.js -->
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         SECTION 5: CONTACT (SEND A CALLING CARD)
+         ==================================================================== -->
+    <section id="section-contact" class="app-section is-hidden">
+      
+      <div class="section-header-row">
+        <h2 class="section-title-cutout">
+          <span class="c-tile">C</span>
+          <span class="c-tile">O</span>
+          <span class="c-tile">N</span>
+          <span class="c-tile">T</span>
+          <span class="c-tile">A</span>
+          <span class="c-tile">C</span>
+          <span class="c-tile">T</span>
+        </h2>
+        <span class="chat-live-badge">★ PHANTOM DISPATCH</span>
+      </div>
+
+      <div class="calling-card-container">
+        <div class="calling-card-header">
+          <h2 class="calling-card-title">DISPATCH A CALLING CARD</h2>
+          <p style="font-family: var(--font-p5-sans); color: #000; font-weight: 700; margin-top: 0.4rem;">
+            Sir/Madam: We have observed your project desires. Leave your decree below, and we shall initiate change of heart.
+          </p>
+        </div>
+
+        <form id="calling-card-form" class="calling-card-form" onsubmit="phansiteApp.handleCallingCardSubmit(event)">
+          <div class="calling-input-group">
+            <label class="calling-input-label" for="card-sender-name">SENDER (YOUR NAME / ALIAS):</label>
+            <input type="text" id="card-sender-name" class="calling-input-field" placeholder="e.g. Inspector Zenigata or Client" required />
+          </div>
+
+          <div class="calling-input-group">
+            <label class="calling-input-label" for="card-sender-email">FREQUENCY (EMAIL ADDRESS):</label>
+            <input type="email" id="card-sender-email" class="calling-input-field" placeholder="e.g. client@shibuya.io" required />
+          </div>
+
+          <div class="calling-input-group">
+            <label class="calling-input-label" for="card-message">THE DECREE (YOUR MESSAGE):</label>
+            <textarea id="card-message" class="calling-input-field" rows="4" placeholder="State the crime or the project challenge you want resolved..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-send-calling-card" id="btn-submit-card">
+            DISPATCH CALLING CARD ➔
+          </button>
+        </form>
       </div>
 
     </section>
@@ -538,15 +760,367 @@
     </div>
   </div>
 
-  <!-- Toast Container -->
-  <div id="toast-container"></div>
+  <!-- ====================================================================
+       ADMIN CMS MODAL (SAFE KEYPAD & DASHBOARD)
+       ==================================================================== -->
+  <div class="p5-modal-overlay is-hidden" id="admin-cms-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteAdmin.closeAdminModal()"></div>
+    <div class="p5-modal-window" style="max-width: 1000px; width: 95%;">
+      <div class="modal-header-bar">
+        <span class="modal-title">★ COGNITIVE CMS // METAVERSE OPERATOR</span>
+        <button class="btn-modal-close" onclick="phansiteAdmin.closeAdminModal()">✕</button>
+      </div>
+
+      <!-- PANEL 1: SAFE COMBINATION KEYPAD (LOCK SCREEN) -->
+      <div id="admin-keypad-panel" class="modal-body-content">
+        <div class="admin-keypad-box">
+          <div style="font-family: var(--font-p5-menu); font-size: 1.8rem; color: #fff; margin-bottom: 0.2rem;">
+            SECURITY VERIFICATION
+          </div>
+          <p style="font-family: var(--font-p5-sans); font-size: 0.9rem; color: #aaa;">
+            Enter 4-Digit Passcode (Default: <strong style="color: var(--p5-yellow);">1234</strong>)
+          </p>
+
+          <div class="admin-pin-display">
+            <div class="admin-pin-dot"></div>
+            <div class="admin-pin-dot"></div>
+            <div class="admin-pin-dot"></div>
+            <div class="admin-pin-dot"></div>
+          </div>
+
+          <div class="admin-keypad-grid">
+            <button type="button" class="admin-keypad-btn" data-val="1">1</button>
+            <button type="button" class="admin-keypad-btn" data-val="2">2</button>
+            <button type="button" class="admin-keypad-btn" data-val="3">3</button>
+            <button type="button" class="admin-keypad-btn" data-val="4">4</button>
+            <button type="button" class="admin-keypad-btn" data-val="5">5</button>
+            <button type="button" class="admin-keypad-btn" data-val="6">6</button>
+            <button type="button" class="admin-keypad-btn" data-val="7">7</button>
+            <button type="button" class="admin-keypad-btn" data-val="8">8</button>
+            <button type="button" class="admin-keypad-btn" data-val="9">9</button>
+            <button type="button" class="admin-keypad-btn" data-val="clear" style="font-size: 1.1rem; color: var(--p5-red);">CLR</button>
+            <button type="button" class="admin-keypad-btn" data-val="0">0</button>
+            <button type="button" class="admin-keypad-btn" data-val="submit" style="font-size: 1.1rem; color: var(--p5-yellow);">OK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: FULL ADMIN DASHBOARD -->
+      <div id="admin-dashboard-panel" class="modal-body-content is-hidden">
+        
+        <!-- Top Stats Row -->
+        <div class="admin-stats-row">
+          <div class="admin-stat-card">
+            <div class="admin-stat-val" id="admin-stat-projects">0</div>
+            <div class="admin-stat-lbl">Active Targets</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-val" id="admin-stat-exp">0</div>
+            <div class="admin-stat-lbl">Confidant Milestones</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-val" id="admin-stat-cert">0</div>
+            <div class="admin-stat-lbl">Tarot Certificates</div>
+          </div>
+        </div>
+
+        <!-- Sub-Navigation Bar -->
+        <div class="admin-top-nav-bar">
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <button class="btn-p5-hero admin-nav-tab is-active" data-admin-tab="projects">
+              TARGETS (PROJECTS)
+            </button>
+            <button class="btn-p5-hero admin-nav-tab" data-admin-tab="experience">
+              CONFIDANTS (EXPERIENCE)
+            </button>
+            <button class="btn-p5-hero admin-nav-tab" data-admin-tab="backup">
+              SYSTEM &amp; BACKUP
+            </button>
+          </div>
+          <button class="btn-target-action" onclick="phansiteAdmin.logout()" style="background: #000; color: #fff; border-color: #fff; max-width: 120px;">
+            LOGOUT ⏻
+          </button>
+        </div>
+
+        <!-- VIEW 1: PROJECTS MANAGER -->
+        <div id="admin-view-projects" class="admin-view-content">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="font-family: var(--font-p5-menu); font-size: 1.6rem; color: #fff;">
+              TARGET ARCHIVES (PROJECTS)
+            </h3>
+            <button class="btn-p5-send" onclick="phansiteAdmin.openProjectFormModal()">
+              + NEW TARGET
+            </button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 45px;">#</th>
+                  <th>TARGET &amp; STACK</th>
+                  <th>CRIME / DESCRIPTION</th>
+                  <th style="width: 110px;">DATE</th>
+                  <th style="width: 140px; text-align: right;">OPERATIONS</th>
+                </tr>
+              </thead>
+              <tbody id="admin-projects-table-body">
+                <!-- Rendered dynamically by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VIEW 2: EXPERIENCE & CERTIFICATE MANAGER -->
+        <div id="admin-view-experience" class="admin-view-content is-hidden">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="font-family: var(--font-p5-menu); font-size: 1.6rem; color: #fff;">
+              CONFIDANT JOURNEY (EXPERIENCE)
+            </h3>
+            <div style="display: flex; gap: 0.6rem;">
+              <button class="btn-p5-send" onclick="phansiteAdmin.openExperienceFormModal()">
+                + NEW CONFIDANT
+              </button>
+              <button class="btn-p5-send" style="background: var(--p5-yellow); color: #000;" onclick="phansiteAdmin.openCertFormModal()">
+                + NEW CERTIFICATE
+              </button>
+            </div>
+          </div>
+
+          <div id="admin-experience-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <!-- Rendered by admin.js -->
+          </div>
+
+          <h3 style="font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff; margin: 1.5rem 0 0.8rem;">
+            COMPETENCY CERTIFICATES
+          </h3>
+          <div id="admin-cert-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+            <!-- Rendered by admin.js -->
+          </div>
+        </div>
+
+        <!-- VIEW 3: SYSTEM & BACKUP -->
+        <div id="admin-view-backup" class="admin-view-content is-hidden">
+          <div style="background: #111; border: 2px solid #333; padding: 1.5rem; margin-bottom: 1.5rem;">
+            <h3 style="font-family: var(--font-p5-menu); font-size: 1.8rem; color: #fff; margin-bottom: 0.4rem;">
+              METAVERSE DATA PORTABILITY
+            </h3>
+            <p style="font-family: var(--font-p5-sans); color: #bbb; font-size: 0.95rem; margin-bottom: 1.2rem;">
+              Backup and restore all projects, experiences, and certifications as clean JSON archives.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn-p5-hero" onclick="phansiteAdmin.exportDatabase()">
+                EXPORT BACKUP (JSON) ⤓
+              </button>
+              <label class="btn-p5-hero btn-secondary" style="cursor: pointer; display: inline-flex; align-items: center;">
+                RESTORE ARCHIVE (JSON) ⤒
+                <input type="file" id="admin-import-file" accept=".json" style="display: none;" />
+              </label>
+            </div>
+          </div>
+
+          <div style="background: #190003; border: 2px solid var(--p5-red); padding: 1.5rem;">
+            <h3 style="font-family: var(--font-p5-menu); font-size: 1.6rem; color: var(--p5-red); margin-bottom: 0.4rem;">
+              DANGER ZONE // COGNITIVE RESET
+            </h3>
+            <p style="font-family: var(--font-p5-sans); color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+              Reset the entire portfolio database back to original Persona 5 sample seed projects and experiences.
+            </p>
+            <button class="btn-target-action" onclick="phansiteAdmin.resetDatabase()" style="background: var(--p5-red); color: #fff; font-size: 1.1rem; padding: 0.6rem 1.4rem;">
+              RESET TO FACTORY SEED ⚠
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROJECT FORM MODAL (CREATE / EDIT) -->
+  <div class="p5-modal-overlay is-hidden" id="admin-project-form-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteAdmin.closeProjectFormModal()"></div>
+    <div class="p5-modal-window" style="max-width: 650px; width: 95%;">
+      <div class="modal-header-bar">
+        <span class="modal-title" id="proj-form-modal-title">TARGET PROTOCOL: NEW TARGET</span>
+        <button class="btn-modal-close" onclick="phansiteAdmin.closeProjectFormModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form id="admin-project-form">
+          <input type="hidden" id="proj-form-id" value="" />
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">TARGET NAME / PROJECT TITLE:</label>
+            <input type="text" id="proj-input-title" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Metaverse Nexus E-Commerce" />
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">CRIME SOLVED / DESCRIPTION:</label>
+            <textarea id="proj-input-desc" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%; min-height: 80px;" required placeholder="Describe the problem solved, architectural approach, and features..."></textarea>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">COVER IMAGE URL:</label>
+            <input type="url" id="proj-input-image" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="https://example.com/cover.jpg" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">LIVE DEMO URL:</label>
+              <input type="url" id="proj-input-live" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="https://example.com" />
+            </div>
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">GITHUB REPO URL:</label>
+              <input type="url" id="proj-input-repo" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="https://github.com/..." />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">TECH STACK (COMMA SEPARATED):</label>
+            <input type="text" id="proj-input-tech" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="React, Next.js, TailwindCSS, PostgreSQL" />
+          </div>
+
+          <button type="submit" class="btn-p5-send" style="width: 100%; font-size: 1.4rem;">
+            SAVE TARGET PROTOCOL
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE FORM MODAL (CREATE / EDIT) -->
+  <div class="p5-modal-overlay is-hidden" id="admin-experience-form-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteAdmin.closeExperienceFormModal()"></div>
+    <div class="p5-modal-window" style="max-width: 600px; width: 95%;">
+      <div class="modal-header-bar">
+        <span class="modal-title">CONFIDANT ARCHIVE: EXPERIENCE</span>
+        <button class="btn-modal-close" onclick="phansiteAdmin.closeExperienceFormModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form id="admin-experience-form">
+          <input type="hidden" id="exp-form-id" value="" />
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">ROLE / TITLE:</label>
+            <input type="text" id="exp-input-role" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Lead Full-Stack Infiltrator" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">COMPANY / ORGANIZATION:</label>
+              <input type="text" id="exp-input-company" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Phantom Studio Lab" />
+            </div>
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">PERIOD / YEARS:</label>
+              <input type="text" id="exp-input-period" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="e.g. 2024 - Present" />
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">CONFIDANT RANK:</label>
+              <input type="text" id="exp-input-rank" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="e.g. RANK 10 (MAX)" />
+            </div>
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">ARCANA:</label>
+              <input type="text" id="exp-input-arcana" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="e.g. THE FOOL" />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">ACCOMPLISHMENTS / DESCRIPTION:</label>
+            <textarea id="exp-input-desc" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%; min-height: 70px;" placeholder="Key responsibilities and achievements..."></textarea>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">SKILLS (COMMA SEPARATED):</label>
+            <input type="text" id="exp-input-skills" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="React, Node.js, Architecture" />
+          </div>
+
+          <button type="submit" class="btn-p5-send" style="width: 100%; font-size: 1.4rem;">
+            SAVE CONFIDANT RECORD
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATE FORM MODAL -->
+  <div class="p5-modal-overlay is-hidden" id="admin-cert-form-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteAdmin.closeCertFormModal()"></div>
+    <div class="p5-modal-window" style="max-width: 550px; width: 95%;">
+      <div class="modal-header-bar">
+        <span class="modal-title">NEW COMPETENCY CERTIFICATE</span>
+        <button class="btn-modal-close" onclick="phansiteAdmin.closeCertFormModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form id="admin-cert-form">
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">CERTIFICATE TITLE:</label>
+            <input type="text" id="cert-input-title" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Metaverse Full-Stack Engineer" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">ISSUER / INSTITUTION:</label>
+              <input type="text" id="cert-input-issuer" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Cognitive Institute" />
+            </div>
+            <div>
+              <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">YEAR:</label>
+              <input type="text" id="cert-input-year" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="e.g. 2025" />
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">TAROT ARCANA:</label>
+            <input type="text" id="cert-input-arcana" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="e.g. JUDGEMENT" />
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.2rem; color: #fff; margin-bottom: 0.3rem;">CREDENTIAL URL:</label>
+            <input type="url" id="cert-input-url" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" placeholder="https://example.com/cert/..." />
+          </div>
+
+          <button type="submit" class="btn-p5-send" style="width: 100%; font-size: 1.4rem;">
+            RECORD CERTIFICATE
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="p5-modal-overlay is-hidden" id="admin-delete-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteAdmin.closeDeleteModal()"></div>
+    <div class="p5-modal-window" style="max-width: 500px; width: 90%; border-color: var(--p5-red); box-shadow: 8px 8px 0 var(--p5-red);">
+      <div class="modal-header-bar" style="background: var(--p5-red);">
+        <span class="modal-title">PURGE COGNITIVE TARGET</span>
+        <button class="btn-modal-close" onclick="phansiteAdmin.closeDeleteModal()">✕</button>
+      </div>
+      <div class="modal-body-content" style="text-align: center; padding: 2rem 1.5rem;">
+        <div style="font-size: 3rem; color: var(--p5-red); margin-bottom: 0.8rem;">⚠</div>
+        <p id="admin-delete-message" style="font-family: var(--font-p5-sans); font-size: 1.1rem; color: #fff; margin-bottom: 1.8rem; line-height: 1.5;"></p>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn-target-action" onclick="phansiteAdmin.closeDeleteModal()" style="background: #fff; color: #000; flex: 1; padding: 0.7rem;">
+            CANCEL
+          </button>
+          <button class="btn-target-action" onclick="phansiteAdmin.executeDelete()" style="background: var(--p5-red); color: #fff; border-color: #000; flex: 1; padding: 0.7rem;">
+            PURGE RECORD
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global P5 Toast Notifications Container -->
+  <div id="p5-toast-container"></div>
 
   <!-- Scripts with Cachebuster -->
-  <script src="assets/js/audio.js?v=20260913_p5r_sfx"></script>
-  <script src="assets/js/poll.js?v=20260913_p5r_sfx"></script>
-  <script src="assets/js/chat.js?v=20260913_p5r_sfx"></script>
-  <script src="assets/js/requests.js?v=20260913_p5r_sfx"></script>
-  <script src="assets/js/app.js?v=20260913_p5r_sfx"></script>
+  <script src="assets/js/store.js?v=20260913_p5r"></script>
+  <script src="assets/js/audio.js?v=20260913_p5r"></script>
+  <script src="assets/js/poll.js?v=20260913_p5r"></script>
+  <script src="assets/js/admin.js?v=20260913_p5r"></script>
+  <script src="assets/js/app.js?v=20260913_p5r"></script>
 
   <script>
     // Resilient Music Box Mini Toggle Helper
