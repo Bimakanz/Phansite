@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHANSITE // Phantom Aficionado Website - Persona 5</title>
+  <meta name="description" content="Exact authentic replica of the Persona 5 Phansite from the community Figma file. Features interactive approval poll, real P5 OST music player, live citizen comments, and target requests.">
+  
+  <!-- Preconnect and Google Fonts (Cinzel, Roboto Condensed, Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Montserrat:wght@400;600;700;900&family=Roboto+Condensed:wght@700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css?v=20260913_scrollbar_chunky">
+</head>
+<body>
+
+  <!-- ====================================================================
+       TOP NAVIGATION BAR (Figma 1:27 Exact Replica)
+       ==================================================================== -->
+  <header class="p5-header">
+    <div class="header-inner">
+      <nav class="main-nav" aria-label="Main Navigation">
+        
+        <!-- HOME Cutout Tiles -->
+        <button class="nav-tab-btn is-active" data-tab="home" id="tab-btn-home" onclick="phansiteApp.switchTab('home')">
+          <span class="c-tile">H</span>
+          <span class="c-tile">O</span>
+          <span class="c-tile">M</span>
+          <span class="c-tile">E</span>
+        </button>
+
+        <!-- REQUESTS Cutout Tiles -->
+        <button class="nav-tab-btn" data-tab="requests" id="tab-btn-requests" onclick="phansiteApp.switchTab('requests')">
+          <span class="c-tile">R</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">Q</span>
+          <span class="c-tile">U</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">S</span>
+          <span class="c-tile">T</span>
+          <span class="c-tile">S</span>
+        </button>
+
+        <!-- CHATS Cutout Tiles -->
+        <button class="nav-tab-btn" data-tab="chats" id="tab-btn-chats" onclick="phansiteApp.switchTab('chats')">
+          <span class="c-tile">C</span>
+          <span class="c-tile">H</span>
+          <span class="c-tile">A</span>
+          <span class="c-tile">T</span>
+          <span class="c-tile">S</span>
+        </button>
+
+      </nav>
+
+      <!-- Right Controls: Settings & Joker Mask Avatar -->
+      <div class="header-user-controls">
+        <button class="btn-header-icon" id="btn-open-settings" onclick="phansiteApp.openSettingsModal()" title="Settings">
+          ⚙
+        </button>
+        
+        <div class="header-avatar-circle" onclick="phansiteApp.openProfileModal()" title="Aficionado Profile">
+          <img src="assets/img/joker_mask.png" alt="Joker Mask" class="header-mask-avatar" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       MAIN CONTENT CONTAINER
+       ==================================================================== -->
+  <main class="app-container">
+
+    <!-- ====================================================================
+         SECTION 1: HOME VIEW (FIGMA WIREFRAME 1:27 EXACT REPLICA)
+         ==================================================================== -->
+    <section id="section-home" class="app-section">
+      
+      <!-- The Giant Diagonal Black Poll Banner -->
+      <div class="poll-banner-slant-wrapper">
+        <div class="poll-banner-black-strip">
+          <div class="poll-banner-content">
+            
+            <!-- In-game Japanese questionnaire tag -->
+            <div class="poll-jp-header-tag">怪盗アンケート</div>
+
+            <!-- Question Title with Lightning Flame Star & Q -->
+            <div class="poll-q-title-row">
+              <div class="poll-flame-star-badge">
+                <img src="assets/img/p5_flame_star.png" alt="Flame Star" class="flame-star-img" />
+              </div>
+              <span class="poll-giant-q">Q</span>
+              <div class="poll-q-text-group">
+                <div class="poll-question-jp">怪盗団を信じますか、信じませんか？</div>
+                <h1 class="poll-question-text">
+                  Do you believe in the<br>
+                  Phantom Thieves?
+                </h1>
+              </div>
+            </div>
+
+            <!-- Authentic In-Game A + YES 6.7% Header with Red Underline -->
+            <div class="poll-percentage-wrapper">
+              <div class="poll-percentage-header">
+                <span class="txt-a-red">A</span>
+                <span class="txt-yes-orange">YES</span>
+                <span class="num-percent-orange" id="poll-percent-display">6.7%</span>
+              </div>
+              <div class="poll-underline-red"></div>
+            </div>
+
+            <!-- Slanted Progress Bar: YES [=======  ] NO -->
+            <div class="poll-progress-outer-wrap">
+              <span class="poll-label-yes">YES</span>
+              <div class="poll-bar-slanted-track">
+                <div class="poll-bar-slanted-fill" id="poll-slanted-fill" style="width: 6.7%;"></div>
+              </div>
+              <span class="poll-label-no">NO</span>
+            </div>
+
+            <!-- In-Game Voting Acknowledgement Text -->
+            <div class="poll-thanks-subtext">
+              投票ありがとうございました。<br>
+              次のアンケートにもご協力下さい。
+            </div>
+
+            <!-- 3D Perspective Slanted Buttons matching user screenshot -->
+            <div class="poll-buttons-boxed-row">
+              <button class="btn-p5-3d" id="btn-boxed-yes" onclick="phansitePoll.vote('YES')" title="Vote YES">
+                <span class="btn-3d-text">YES</span>
+                <span class="btn-3d-sub">信じる</span>
+              </button>
+              <button class="btn-p5-3d" id="btn-boxed-no" onclick="phansitePoll.vote('NO')" title="Vote NO">
+                <span class="btn-3d-text">NO</span>
+                <span class="btn-3d-sub">信じない</span>
+              </button>
+            </div>
+
+            <!-- Phantom Channel Official Stamp Seal from screenshot -->
+            <div class="poll-footer-seal">
+              <img src="assets/img/joker_mask.png" alt="Phantom Mask" class="poll-seal-mask" />
+              <div class="poll-seal-channel">怪盗チャンネル</div>
+              <div class="poll-seal-id">ID: 怪盗団公式ホームページ</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Down Chevron Arrow -->
+      <div class="poll-down-arrow-wrap">
+        <svg class="p5-down-chevron" viewBox="0 0 24 24" fill="none">
+          <path d="M4 8L12 16L20 8" stroke="#E60012" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Comment Input Box (Matches 1:27.png) -->
+      <div class="comment-input-strip-wrapper">
+        <div class="comment-author-avatar-box">
+          <img src="assets/img/joker_mask.png" alt="Aficionado Avatar" />
+        </div>
+
+        <div class="comment-slanted-input-card">
+          <input 
+            type="text" 
+            id="home-comment-input" 
+            class="comment-input-field" 
+            placeholder="Enter your comment here..." 
+            autocomplete="off"
+            maxlength="200"
+          />
+        </div>
+
+        <div class="comment-submit-col">
+          <label class="anonymous-checkbox-wrap">
+            <input type="checkbox" id="comment-anonymous-toggle" />
+            <span class="custom-chk"></span>
+            <span class="chk-label">Anonymous</span>
+          </label>
+          <button class="btn-p5-send" id="btn-home-send-comment" onclick="submitHomeComment()">
+            SEND
+          </button>
+        </div>
+      </div>
+
+      <!-- Comments List Header ("Comments" with Cutout Letters) -->
+      <div class="comments-section-title-wrap">
+        <div class="p5-cutout-title">
+          <span class="cutout-letter style-white">C</span>
+          <span class="cutout-letter style-black">o</span>
+          <span class="cutout-letter style-white">m</span>
+          <span class="cutout-letter style-black">m</span>
+          <span class="cutout-letter style-white">e</span>
+          <span class="cutout-letter style-black">n</span>
+          <span class="cutout-letter style-white">t</span>
+          <span class="cutout-letter style-black">s</span>
+        </div>
+      </div>
+
+      <!-- Comments List Cards -->
+      <div class="comments-cards-list" id="home-comments-list">
+        
+        <!-- Comment 1 -->
+        <div class="comment-row-item">
+          <div class="comment-row-avatar">
+            <img src="assets/img/joker_mask.png" alt="Mask" />
+          </div>
+          <div class="comment-content-wrap">
+            <div class="comment-username-tiles">
+              <span class="u-tile">U</span><span class="u-tile">S</span><span class="u-tile">E</span><span class="u-tile">R</span><span class="u-tile">N</span><span class="u-tile">A</span><span class="u-tile">M</span><span class="u-tile">E</span>
+            </div>
+            <div class="comment-bubble-card-white">
+              <span class="comment-bubble-text">Lorem ipsum lorem ipsum lorem ipsum...</span>
+              <button class="comment-report-flag-btn" title="Report Comment" onclick="phansiteApp.showToast('FLAGGED FOR MODERATION', 'error')">
+                <svg class="flag-icon-svg" viewBox="0 0 24 24" fill="#E60012">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment 2 -->
+        <div class="comment-row-item">
+          <div class="comment-row-avatar">
+            <img src="assets/img/joker_mask.png" alt="Mask" />
+          </div>
+          <div class="comment-content-wrap">
+            <div class="comment-username-tiles">
+              <span class="u-tile">M</span><span class="u-tile">I</span><span class="u-tile">S</span><span class="u-tile">H</span><span class="u-tile">I</span><span class="u-tile">M</span><span class="u-tile">A</span>
+            </div>
+            <div class="comment-bubble-card-white">
+              <span class="comment-bubble-text">The Phantom Thieves really changed Kamoshida's heart! He confessed at assembly!</span>
+              <button class="comment-report-flag-btn" title="Report Comment" onclick="phansiteApp.showToast('FLAGGED FOR MODERATION', 'error')">
+                <svg class="flag-icon-svg" viewBox="0 0 24 24" fill="#E60012">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment 3 -->
+        <div class="comment-row-item">
+          <div class="comment-row-avatar">
+            <img src="assets/img/joker_mask.png" alt="Mask" />
+          </div>
+          <div class="comment-content-wrap">
+            <div class="comment-username-tiles">
+              <span class="u-tile">S</span><span class="u-tile">K</span><span class="u-tile">E</span><span class="u-tile">P</span><span class="u-tile">T</span><span class="u-tile">I</span><span class="u-tile">C</span>
+            </div>
+            <div class="comment-bubble-card-white">
+              <span class="comment-bubble-text">It's probably just mass hysteria or a PR stunt. Changing someone's heart is impossible!</span>
+              <button class="comment-report-flag-btn" title="Report Comment" onclick="phansiteApp.showToast('FLAGGED FOR MODERATION', 'error')">
+                <svg class="flag-icon-svg" viewBox="0 0 24 24" fill="#E60012">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment 4 -->
+        <div class="comment-row-item">
+          <div class="comment-row-avatar">
+            <img src="assets/img/joker_mask.png" alt="Mask" />
+          </div>
+          <div class="comment-content-wrap">
+            <div class="comment-username-tiles">
+              <span class="u-tile">T</span><span class="u-tile">O</span><span class="u-tile">K</span><span class="u-tile">Y</span><span class="u-tile">O</span><span class="u-tile">_</span><span class="u-tile">F</span><span class="u-tile">A</span><span class="u-tile">N</span>
+            </div>
+            <div class="comment-bubble-card-white">
+              <span class="comment-bubble-text">Please take down the corrupt plagiarist Madarame next! Save his pupils!</span>
+              <button class="comment-report-flag-btn" title="Report Comment" onclick="phansiteApp.showToast('FLAGGED FOR MODERATION', 'error')">
+                <svg class="flag-icon-svg" viewBox="0 0 24 24" fill="#E60012">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pagination Banner (◄ 1 of 2 ►) -->
+      <div class="pagination-banner-wrap">
+        <div class="pagination-banner-slanted" onclick="phansiteApp.showToast('PAGE 1 OF 2', 'info')">
+          <span>◄</span>
+          <span class="pag-text">1 of 2</span>
+          <span>►</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         SECTION 2: REQUESTS (MEMENTOS TARGET TABLE)
+         ==================================================================== -->
+    <section id="section-requests" class="app-section is-hidden">
+      
+      <div class="section-header-row">
+        <h2 class="section-title-cutout">
+          <span class="c-tile">R</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">Q</span>
+          <span class="c-tile">U</span>
+          <span class="c-tile">E</span>
+          <span class="c-tile">S</span>
+          <span class="c-tile">T</span>
+          <span class="c-tile">S</span>
+        </h2>
+        <button class="btn-p5-send" onclick="phansiteRequests.openNewTargetModal()">
+          + REPORT TARGET
+        </button>
+      </div>
+
+      <div class="requests-table-container">
+        <table class="p5-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>TARGET</th>
+              <th>CRIME / TITLE</th>
+              <th>STATUS</th>
+              <th style="text-align: right;">VOTES</th>
+            </tr>
+          </thead>
+          <tbody id="requests-table-body">
+            <!-- Rendered by requests.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         SECTION 3: CHATS (FORUM / DISCUSSION ROOM)
+         ==================================================================== -->
+    <section id="section-chats" class="app-section is-hidden">
+      
+      <div class="chat-layout-grid">
+        <aside class="chat-sidebar-card">
+          <h2 class="chat-sidebar-title">CHANNELS</h2>
+          <button class="chat-channel-btn is-active" data-channel="general" onclick="switchChatChannel('general', this)"># general-shibuya</button>
+          <button class="chat-channel-btn" data-channel="requests-chat" onclick="switchChatChannel('requests-chat', this)"># target-reports</button>
+          <button class="chat-channel-btn" data-channel="mementos-theories" onclick="switchChatChannel('mementos-theories', this)"># mementos-subway</button>
+        </aside>
+
+        <div class="chat-main-view">
+          <div class="chat-view-header">
+            <span id="chat-channel-display"># general-shibuya</span>
+            <span class="chat-live-badge">● LIVE DISCUSSIONS</span>
+          </div>
+
+          <div class="chat-messages-scroll" id="chat-messages-container">
+            <!-- Messages rendered by chat.js -->
+          </div>
+
+          <div class="chat-input-area">
+            <form class="chat-form" id="chat-form" onsubmit="handleChatSubmit(event)">
+              <input type="text" class="chat-input-text" id="chat-input-text" placeholder="Type your comment to the Aficionados..." maxlength="280" />
+              <button type="submit" class="btn-chat-send">SEND</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       AUTHENTIC FIGMA PERSONA 5 MUSIC BOX (FRAME 144:517)
+       ==================================================================== -->
+  <aside class="figma-p5-music-box" id="floating-music-player">
+    <div class="music-box-frame">
+      <!-- High-res authentic Figma background (Comic jagged banner) -->
+      <img src="assets/img/p5_music_banner_only.png" alt="Persona 5 OST Music Player" class="music-box-bg" />
+
+      <!-- Left Polaroid Album Art (Flips in 3D on song switch) -->
+      <div class="music-box-album-wrap" id="music-box-album-wrap">
+        <img src="assets/img/p5_music_album_art.png" alt="Persona 5 Album Art" class="music-box-album-art" id="music-box-album-art" />
+      </div>
+
+      <!-- Mobile Minimize / Expand Toggle Button -->
+      <button class="music-box-mini-toggle" id="music-box-mini-toggle" onclick="toggleMusicBoxMini()" title="Minimize / Expand Player">
+        <span id="mini-toggle-icon">▼</span>
+      </button>
+
+      <!-- Interactive Overlay Content -->
+      <div class="music-box-content">
+        <div class="music-box-now-playing" id="np-wave-text">
+          <span class="char" style="--char-index: 0">N</span>
+          <span class="char" style="--char-index: 1">O</span>
+          <span class="char" style="--char-index: 2">W</span>
+          <span class="char-space">&nbsp;</span>
+          <span class="char" style="--char-index: 3">P</span>
+          <span class="char" style="--char-index: 4">L</span>
+          <span class="char" style="--char-index: 5">A</span>
+          <span class="char" style="--char-index: 6">Y</span>
+          <span class="char" style="--char-index: 7">I</span>
+          <span class="char" style="--char-index: 8">N</span>
+          <span class="char" style="--char-index: 9">G</span>
+        </div>
+        <div class="music-box-title" id="np-track-title">Beneath the Mask</div>
+        
+        <div class="music-box-controls">
+          <button class="m-btn btn-prev" onclick="phansiteAudio.prevTrack()" title="Previous Track">
+            <svg viewBox="0 0 24 24" class="m-icon">
+              <path d="M6 5h3v14H6zm3.5 7l10 7V5z"/>
+            </svg>
+          </button>
+          
+          <button class="m-btn btn-play" id="btn-music-play-toggle" onclick="phansiteAudio.togglePlay()" title="Play / Pause">
+            <!-- Icon when paused -->
+            <svg viewBox="0 0 24 24" class="m-icon icon-play">
+              <polygon points="6,4 20,12 6,20"/>
+            </svg>
+            <!-- Icon when playing -->
+            <svg viewBox="0 0 24 24" class="m-icon icon-pause">
+              <rect x="6" y="4" width="4" height="16"/>
+              <rect x="14" y="4" width="4" height="16"/>
+            </svg>
+          </button>
+
+          <button class="m-btn btn-next" onclick="phansiteAudio.nextTrack()" title="Next Track">
+            <svg viewBox="0 0 24 24" class="m-icon">
+              <path d="M5 19l10-7-10-7v14zM16 5h3v14h-3z"/>
+            </svg>
+          </button>
+
+          <button class="m-btn btn-volume" id="btn-music-volume-toggle" onclick="phansiteAudio.toggleMute()" title="Volume / Mute">
+            <svg viewBox="0 0 24 24" class="m-icon icon-vol">
+              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ====================================================================
+       MODALS
+       ==================================================================== -->
+
+  <!-- Target Detail Modal -->
+  <div class="p5-modal-overlay is-hidden" id="target-detail-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteRequests.closeDetail()"></div>
+    <div class="p5-modal-window">
+      <div class="modal-header-bar">
+        <span class="modal-title">TARGET DOSSIER</span>
+        <button class="btn-modal-close" onclick="phansiteRequests.closeDetail()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <h2 id="detail-target-name" style="font-family: var(--font-p5-serif); font-size: 2.5rem; color: #fff;">Target Name</h2>
+        <p id="detail-target-title" style="color: var(--p5-yellow); font-weight: 700; margin-bottom: 0.5rem;">Crime</p>
+        <span id="detail-status" class="request-status-pill badge-status-completed">STATUS</span>
+        
+        <div style="background: #000; padding: 1rem; border-left: 4px solid var(--p5-red); margin: 1.2rem 0;">
+          <p id="detail-summary" style="color: #fff; font-size: 1.1rem; margin-bottom: 0.6rem;"></p>
+          <p id="detail-description" style="color: #aaa; font-size: 0.95rem;"></p>
+        </div>
+
+        <button class="btn-boxed-vote" id="detail-vote-btn" style="width: 100%; font-size: 1.6rem;">
+          ★ UPVOTE TARGET (<span id="detail-vote-count">0</span>)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Target Modal -->
+  <div class="p5-modal-overlay is-hidden" id="new-target-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteRequests.closeNewTargetModal()"></div>
+    <div class="p5-modal-window">
+      <div class="modal-header-bar">
+        <span class="modal-title">REPORT CORRUPT TARGET</span>
+        <button class="btn-modal-close" onclick="phansiteRequests.closeNewTargetModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form id="new-target-form">
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff; margin-bottom: 0.3rem;">TARGET NAME:</label>
+            <input type="text" id="input-target-name" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Suguru Kamoshida">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff; margin-bottom: 0.3rem;">CRIME / TRANSGRESSION:</label>
+            <input type="text" id="input-target-crime" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required placeholder="e.g. Academic abuse">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff; margin-bottom: 0.3rem;">DETAILS & EVIDENCE:</label>
+            <textarea id="input-target-details" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%; min-height: 80px;" required placeholder="Describe what they did..."></textarea>
+          </div>
+          <button type="submit" class="btn-p5-send" style="width: 100%;">SUBMIT TO THE THIEVES</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="p5-modal-overlay is-hidden" id="settings-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteApp.closeSettingsModal()"></div>
+    <div class="p5-modal-window">
+      <div class="modal-header-bar">
+        <span class="modal-title">SETTINGS</span>
+        <button class="btn-modal-close" onclick="phansiteApp.closeSettingsModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff;">BGM VOLUME:</label>
+          <input type="range" id="settings-bgm-volume" min="0" max="100" value="70" style="width: 100%; accent-color: var(--p5-red); cursor: pointer;" />
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff;">SFX VOLUME:</label>
+          <input type="range" id="settings-sfx-volume" min="0" max="100" value="80" style="width: 100%; accent-color: var(--p5-red); cursor: pointer;" />
+        </div>
+        <button class="btn-p5-send" style="width: 100%;" onclick="phansiteApp.closeSettingsModal()">DONE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="p5-modal-overlay is-hidden" id="profile-modal">
+    <div class="p5-modal-backdrop" onclick="phansiteApp.closeProfileModal()"></div>
+    <div class="p5-modal-window">
+      <div class="modal-header-bar">
+        <span class="modal-title">AFICIONADO PROFILE</span>
+        <button class="btn-modal-close" onclick="phansiteApp.closeProfileModal()">✕</button>
+      </div>
+      <div class="modal-body-content">
+        <form onsubmit="phansiteApp.saveProfile(event)">
+          <div style="margin-bottom: 1.2rem;">
+            <label style="display: block; font-family: var(--font-p5-menu); font-size: 1.4rem; color: #fff; margin-bottom: 0.4rem;">USERNAME:</label>
+            <input type="text" id="profile-input-username" class="comment-input-field" style="background: #fff; padding: 0.6rem; width: 100%;" required maxlength="25" />
+          </div>
+          <button type="submit" class="btn-p5-send" style="width: 100%;">SAVE PROFILE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts with Cachebuster -->
+  <script src="assets/js/audio.js?v=20260913_p5r_sfx"></script>
+  <script src="assets/js/poll.js?v=20260913_p5r_sfx"></script>
+  <script src="assets/js/chat.js?v=20260913_p5r_sfx"></script>
+  <script src="assets/js/requests.js?v=20260913_p5r_sfx"></script>
+  <script src="assets/js/app.js?v=20260913_p5r_sfx"></script>
+
+  <script>
+    // Resilient Music Box Mini Toggle Helper
+    function toggleMusicBoxMini() {
+      if (window.phansiteAudio && typeof window.phansiteAudio.toggleMiniPlayer === 'function') {
+        window.phansiteAudio.toggleMiniPlayer();
+      } else {
+        const player = document.getElementById('floating-music-player');
+        const toggleIcon = document.getElementById('mini-toggle-icon');
+        if (player) {
+          player.classList.toggle('is-minimized');
+          const isMini = player.classList.contains('is-minimized');
+          if (toggleIcon) toggleIcon.textContent = isMini ? '▲' : '▼';
+        }
+      }
+    }
+    // Comment box on Home page
+    function submitHomeComment() {
+      const input = document.getElementById('home-comment-input');
+      const isAnon = document.getElementById('comment-anonymous-toggle').checked;
+      if (!input || !input.value.trim()) return;
+
+      const text = input.value.trim();
+      const rawUser = isAnon ? 'ANONYMOUS' : (localStorage.getItem('phansite_username') || 'USERNAME');
+      const userTiles = rawUser.split('').map(c => `<span class="u-tile">${c}</span>`).join('');
+
+      if (window.phansiteAudio) window.phansiteAudio.playSfx('message');
+
+      const list = document.getElementById('home-comments-list');
+      if (list) {
+        const row = document.createElement('div');
+        row.className = 'comment-row-item';
+        row.innerHTML = `
+          <div class="comment-row-avatar">
+            <img src="assets/img/joker_mask.png" alt="Mask" />
+          </div>
+          <div class="comment-content-wrap">
+            <div class="comment-username-tiles">${userTiles}</div>
+            <div class="comment-bubble-card-white">
+              <span class="comment-bubble-text">${escapeHtml(text)}</span>
+              <button class="comment-report-flag-btn" title="Report Comment" onclick="phansiteApp.showToast('FLAGGED FOR MODERATION', 'error')">
+                <svg class="flag-icon-svg" viewBox="0 0 24 24" fill="#E60012">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `;
+        list.insertBefore(row, list.firstChild);
+      }
+
+      input.value = '';
+      if (window.phansiteApp) window.phansiteApp.showToast('COMMENT POSTED!', 'success');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Allow Enter key to submit comment
+    document.getElementById('home-comment-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submitHomeComment();
+      }
+    });
+
+    function switchChatChannel(ch, btn) {
+      document.querySelectorAll('.chat-channel-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      document.getElementById('chat-channel-display').textContent = '#' + ch;
+      if (window.phansiteChat) {
+        window.phansiteChat.setChannel(ch);
+      }
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input-text');
+      if (!input || !input.value.trim()) return;
+      if (window.phansiteChat) {
+        window.phansiteChat.sendMessage(input.value.trim());
+      }
+      input.value = '';
+    }
+
+    // Auto-init audio on first click anywhere
+    document.addEventListener('click', function initAudioOnce() {
+      if (window.phansiteAudio) {
+        window.phansiteAudio.initContext();
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>
