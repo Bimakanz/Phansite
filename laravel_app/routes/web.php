@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CallingCardController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -13,6 +14,8 @@ use Inertia\Inertia;
 // ─── Public Portfolio Routes ────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/poll/vote', [HomeController::class, 'vote'])->name('poll.vote');
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/about', function () {
     return Inertia::render('About');

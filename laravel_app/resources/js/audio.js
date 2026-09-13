@@ -11,6 +11,7 @@ const SFX_FILES = {
     target: '/assets/audio/sfx/level_upgrade.mp3',
     important: '/assets/audio/sfx/important_click.mp3',
     switch: '/assets/audio/sfx/switch.mp3',
+    'weakness-found': '/assets/audio/sfx/weakness_found.mp3',
 };
 
 class P5AudioEngine {

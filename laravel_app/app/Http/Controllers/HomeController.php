@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\PollVote;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -23,6 +24,11 @@ class HomeController extends Controller
         // Check if user already voted from this IP
         $userVote = PollVote::where('ip_address', $request->ip())->latest()->value('choice');
 
+        // Initial comments (latest 20)
+        $initialComments = Comment::latest()
+            ->take(20)
+            ->get(['id', 'username', 'text', 'created_at']);
+
         return Inertia::render('Home', [
             'latestProjects' => $latestProjects,
             'pollData' => [
@@ -32,6 +38,8 @@ class HomeController extends Controller
                 'percent' => $pollPercent,
                 'userVote' => $userVote,
             ],
+            'initialComments' => $initialComments,
+            'totalComments' => Comment::count(),
         ]);
     }
 
