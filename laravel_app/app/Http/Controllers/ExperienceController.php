@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Services\ImageOptimizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -12,14 +13,15 @@ class ExperienceController extends Controller
     // Public view
     public function index()
     {
-        $experiences = Experience::ordered()->get();
-        return Inertia::render('Experience', compact('experiences'));
+        $experiences = Experience::latest()->get();
+        $certificates = \App\Models\Certificate::latest()->get();
+        return Inertia::render('Experience', compact('experiences', 'certificates'));
     }
 
     // Admin views
     public function adminIndex()
     {
-        $experiences = Experience::ordered()->get();
+        $experiences = Experience::latest()->get();
         return Inertia::render('Admin/Experiences/Index', compact('experiences'));
     }
 
@@ -33,22 +35,15 @@ class ExperienceController extends Controller
         $validated = $request->validate([
             'title'          => 'required|string|max:255',
             'organization'   => 'required|string|max:255',
-            'type'           => 'required|in:certificate,work,education',
+            'type'           => 'required|in:work,education',
             'description'    => 'nullable|string',
             'date_start'     => 'nullable|date',
             'date_end'       => 'nullable|date',
-            'image_url'      => 'nullable|url',
-            'image_file'     => 'nullable|image|max:4096',
             'credential_url' => 'nullable|url',
-            'order'          => 'integer',
+            'order'          => 'nullable|integer',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image_file')) {
-            $imagePath = $request->file('image_file')->store('experiences', 'public');
-        }
-
-        Experience::create(array_merge($validated, ['image_path' => $imagePath]));
+        Experience::create($validated);
 
         return redirect()->route('admin.experiences.index')->with('success', 'Experience created!');
     }
@@ -63,22 +58,13 @@ class ExperienceController extends Controller
         $validated = $request->validate([
             'title'          => 'required|string|max:255',
             'organization'   => 'required|string|max:255',
-            'type'           => 'required|in:certificate,work,education',
+            'type'           => 'required|in:work,education',
             'description'    => 'nullable|string',
             'date_start'     => 'nullable|date',
             'date_end'       => 'nullable|date',
-            'image_url'      => 'nullable|url',
-            'image_file'     => 'nullable|image|max:4096',
             'credential_url' => 'nullable|url',
-            'order'          => 'integer',
+            'order'          => 'nullable|integer',
         ]);
-
-        if ($request->hasFile('image_file')) {
-            if ($experience->image_path) {
-                Storage::disk('public')->delete($experience->image_path);
-            }
-            $validated['image_path'] = $request->file('image_file')->store('experiences', 'public');
-        }
 
         $experience->update($validated);
 

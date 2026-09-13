@@ -29,7 +29,13 @@ class Experience extends Model
         if ($this->image_path) {
             return asset('storage/' . $this->image_path);
         }
-        return $this->image_url;
+        if ($this->image_url) {
+            return $this->image_url;
+        }
+        if ($this->type === 'certificate') {
+            return '/assets/img/p5_certificate_sample.webp';
+        }
+        return null;
     }
 
     protected $appends = ['image'];

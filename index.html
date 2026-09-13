@@ -11,6 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Montserrat:wght@400;600;700;900&family=Roboto+Condensed:wght@700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  
   <link rel="stylesheet" href="assets/css/style.css?v=20260913_scrollbar_chunky">
 </head>
 <body>
@@ -89,7 +94,7 @@
         </button>
         
         <div class="header-avatar-circle" onclick="phansiteApp.openProfileModal()" title="Aficionado Profile">
-          <img src="assets/img/joker_mask.png" alt="Joker Mask" class="header-mask-avatar" />
+          <img src="assets/img/joker_mask.webp" alt="Joker Mask" class="header-mask-avatar" />
         </div>
       </div>
     </div>
@@ -118,24 +123,12 @@
               <button class="btn-p5-hero" onclick="phansiteApp.switchTab('projects')" title="View Projects">
                 <span>TARGETS (PROJECTS)</span> ➔
               </button>
-              <button class="btn-p5-hero btn-secondary" onclick="phansiteApp.downloadResume()" title="Steal Resume">
-                <span>STEAL RESUME</span> 📄
+              <button class="btn-p5-hero btn-secondary" onclick="phansiteApp.downloadResume()" title="Steal CV">
+                <span>STEAL CV</span>
               </button>
               <button class="btn-p5-hero btn-secondary" onclick="phansiteApp.switchTab('contact')" title="Send Calling Card">
                 <span>DISPATCH CALLING CARD</span> ✉
               </button>
-            </div>
-          </div>
-
-          <!-- Animated Phansite Approval Rating Widget -->
-          <div class="hero-approval-widget">
-            <div class="approval-widget-header">
-              <span>PHANSITE APPROVAL RATING</span>
-              <span>★ MAX</span>
-            </div>
-            <div class="approval-stat-number" id="hero-approval-number">98%</div>
-            <div class="approval-progress-track">
-              <div class="approval-progress-fill" id="hero-approval-fill" style="width: 98%;"></div>
             </div>
           </div>
         </div>
@@ -152,7 +145,7 @@
             <!-- Question Title with Lightning Flame Star & Q -->
             <div class="poll-q-title-row">
               <div class="poll-flame-star-badge">
-                <img src="assets/img/p5_flame_star.png" alt="Flame Star" class="flame-star-img" />
+                <img src="assets/img/p5_flame_star.webp" alt="Flame Star" class="flame-star-img" />
               </div>
               <span class="poll-giant-q">Q</span>
               <div class="poll-q-text-group">
@@ -203,9 +196,8 @@
 
             <!-- Phantom Channel Official Stamp Seal from screenshot -->
             <div class="poll-footer-seal">
-              <img src="assets/img/joker_mask.png" alt="Phantom Mask" class="poll-seal-mask" />
+              <img src="assets/img/joker_mask.webp" alt="Phantom Mask" class="poll-seal-mask" />
               <div class="poll-seal-channel">怪盗チャンネル</div>
-              <div class="poll-seal-id">ID: 怪盗団公式ホームページ</div>
             </div>
 
           </div>
@@ -222,7 +214,7 @@
       <!-- Comment Input Box (Matches 1:27.png) -->
       <div class="comment-input-strip-wrapper">
         <div class="comment-author-avatar-box">
-          <img src="assets/img/joker_mask.png" alt="Aficionado Avatar" />
+          <img src="assets/img/joker_mask.webp" alt="Aficionado Avatar" />
         </div>
 
         <div class="comment-slanted-input-card">
@@ -268,7 +260,7 @@
         <!-- Comment 1 -->
         <div class="comment-row-item">
           <div class="comment-row-avatar">
-            <img src="assets/img/joker_mask.png" alt="Mask" />
+            <img src="assets/img/joker_mask.webp" alt="Mask" />
           </div>
           <div class="comment-content-wrap">
             <div class="comment-username-tiles">
@@ -288,7 +280,7 @@
         <!-- Comment 2 -->
         <div class="comment-row-item">
           <div class="comment-row-avatar">
-            <img src="assets/img/joker_mask.png" alt="Mask" />
+            <img src="assets/img/joker_mask.webp" alt="Mask" />
           </div>
           <div class="comment-content-wrap">
             <div class="comment-username-tiles">
@@ -308,7 +300,7 @@
         <!-- Comment 3 -->
         <div class="comment-row-item">
           <div class="comment-row-avatar">
-            <img src="assets/img/joker_mask.png" alt="Mask" />
+            <img src="assets/img/joker_mask.webp" alt="Mask" />
           </div>
           <div class="comment-content-wrap">
             <div class="comment-username-tiles">
@@ -328,7 +320,7 @@
         <!-- Comment 4 -->
         <div class="comment-row-item">
           <div class="comment-row-avatar">
-            <img src="assets/img/joker_mask.png" alt="Mask" />
+            <img src="assets/img/joker_mask.webp" alt="Mask" />
           </div>
           <div class="comment-content-wrap">
             <div class="comment-username-tiles">
@@ -437,23 +429,6 @@
             <li>Web Performance &amp; SEO Optimization</li>
           </ul>
         </div>
-
-        <!-- Charm (Design & Soft Skills) -->
-        <div class="parameter-card">
-          <div class="parameter-header">
-            <h3 class="parameter-title">CHARM</h3>
-            <span class="parameter-stars">★★★★★</span>
-          </div>
-          <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700;">UI/UX &amp; COLLABORATION</p>
-          <ul class="parameter-items-list">
-            <li>Persona 5 &amp; Neo-Brutalist Visual Direction</li>
-            <li>Figma Wireframing &amp; Prototyping</li>
-            <li>Agile Methodology &amp; Pair Programming</li>
-            <li>Design System Creation</li>
-            <li>User Empathy &amp; Creative Problem Solving</li>
-          </ul>
-        </div>
-
       </div>
 
     </section>
@@ -474,21 +449,13 @@
           <span class="c-tile">T</span>
           <span class="c-tile">S</span>
         </h2>
-        <div style="display: flex; gap: 0.8rem;">
-          <button class="btn-p5-send" onclick="phansiteAdmin.openAdminModal()">
-            + ISSUE TARGET (ADMIN)
-          </button>
-        </div>
       </div>
 
       <!-- Empty State (Conditional render if projects.length === 0) -->
       <div id="public-projects-empty" class="p5-empty-state is-hidden">
         <div class="empty-state-icon">☠</div>
         <h3 class="empty-state-text">NO TARGETS AVAILABLE.</h3>
-        <p class="empty-state-subtext">The Metaverse is quiet... No requests on the Phansite right now. Launch the Admin CMS to dispatch a new target!</p>
-        <button class="btn-p5-hero" onclick="phansiteAdmin.openAdminModal()">
-          OPEN ADMIN CMS
-        </button>
+        <p class="empty-state-subtext">The Metaverse is quiet... No projects published on the Phansite right now.</p>
       </div>
 
       <!-- Populated State Grid -->
@@ -516,9 +483,6 @@
           <span class="c-tile">C</span>
           <span class="c-tile">E</span>
         </h2>
-        <button class="btn-p5-send" onclick="phansiteAdmin.openAdminModal()">
-          + MANAGE CONFIDANTS
-        </button>
       </div>
 
       <!-- Experience Timeline -->
@@ -597,11 +561,11 @@
   <aside class="figma-p5-music-box" id="floating-music-player">
     <div class="music-box-frame">
       <!-- High-res authentic Figma background (Comic jagged banner) -->
-      <img src="assets/img/p5_music_banner_only.png" alt="Persona 5 OST Music Player" class="music-box-bg" />
+      <img src="assets/img/p5_music_banner_only.webp" alt="Persona 5 OST Music Player" class="music-box-bg" />
 
       <!-- Left Polaroid Album Art (Flips in 3D on song switch) -->
       <div class="music-box-album-wrap" id="music-box-album-wrap">
-        <img src="assets/img/p5_music_album_art.png" alt="Persona 5 Album Art" class="music-box-album-art" id="music-box-album-art" />
+        <img src="assets/img/p5_music_album_art.webp" alt="Persona 5 Album Art" class="music-box-album-art" id="music-box-album-art" />
       </div>
 
       <!-- Mobile Minimize / Expand Toggle Button -->
@@ -1155,7 +1119,7 @@
         row.className = 'comment-row-item';
         row.innerHTML = `
           <div class="comment-row-avatar">
-            <img src="assets/img/joker_mask.png" alt="Mask" />
+            <img src="assets/img/joker_mask.webp" alt="Mask" />
           </div>
           <div class="comment-content-wrap">
             <div class="comment-username-tiles">${userTiles}</div>

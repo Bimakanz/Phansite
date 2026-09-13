@@ -15,10 +15,6 @@ export default function About() {
             title: 'PROFICIENCY', stars: '★★★★☆', sub: 'ENGINEERING & DEVOPS',
             items: ['Git / GitHub Workflow & CI/CD', 'Vite, Webpack & Build Tools', 'Docker Containerization', 'API Design & Integration Testing', 'Web Performance & SEO Optimization']
         },
-        {
-            title: 'CHARM', stars: '★★★★★', sub: 'UI/UX & COLLABORATION',
-            items: ['Persona 5 & Neo-Brutalist Visual Direction', 'Figma Wireframing & Prototyping', 'Agile Methodology & Pair Programming', 'Design System Creation', 'User Empathy & Creative Problem Solving']
-        },
     ];
 
     return (

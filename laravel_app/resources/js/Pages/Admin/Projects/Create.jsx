@@ -1,11 +1,21 @@
-﻿import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { useState } from 'react';
+import P5Select from '@/Components/P5Select';
+import P5ImageUpload from '@/Components/P5ImageUpload';
 
 export default function ProjectCreate() {
+    const [hasLivePreview, setHasLivePreview] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
-        title: '', description: '', tech_stack: [], image_url: '', image_file: null,
-        repo_url: '', live_url: '', status: 'active', order: 0,
+        title: '',
+        description: '',
+        tech_stack: [],
+        image_url: '',
+        image_file: null,
+        repo_url: '',
+        live_url: '',
+        status: 'active',
+        order: 0,
     });
     const [techInput, setTechInput] = useState('');
 
@@ -24,38 +34,176 @@ export default function ProjectCreate() {
     return (
         <AdminLayout>
             <Head title="Create Project — Admin" />
-            <div style={{ display:'flex', alignItems:'center', gap:'1rem', marginBottom:'1.5rem' }}>
-                <Link href="/admin/projects" className="p5-btn p5-btn-sm p5-btn-outline">← Back</Link>
-                <h1 className="font-p5-display" style={{ fontSize:'2rem', color:'var(--p5-white)', letterSpacing:'0.08em' }}>CREATE PROJECT</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <Link href="/admin/projects" className="p5-admin-btn-outline" style={{ padding: '0.4rem 1rem' }}>
+                    ← BACK
+                </Link>
+                <div>
+                    <h1 style={{ fontFamily: 'var(--font-p5-menu)', fontSize: '2.2rem', color: '#fff', letterSpacing: '0.06em', textShadow: '2px 2px 0 var(--p5-red)' }}>
+                        ◈ NEW INFILTRATION TARGET (PROJECT)
+                    </h1>
+                    <p style={{ color: '#bbb', fontFamily: 'var(--font-p5-menu)', fontSize: '0.8rem', letterSpacing: '0.1em' }}>
+                        REGISTER A NEW WORK PROJECT INTO THE PALACE ARCHIVE
+                    </p>
+                </div>
             </div>
-            <div style={{ maxWidth:'800px' }}>
+
+            <div style={{ width: '100%', maxWidth: '1200px' }}>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <div style={{ background:'var(--p5-dark)', border:'2px solid rgba(232,0,61,0.2)', padding:'2rem', display:'grid', gap:'1.5rem' }}>
-                        <div><label className="p5-label">Title *</label><input className="p5-input" value={data.title} onChange={e=>setData('title',e.target.value)} placeholder="Project name..." />{errors.title&&<p style={{color:'var(--p5-red)',fontSize:'0.85rem',marginTop:'0.25rem'}}>{errors.title}</p>}</div>
-                        <div><label className="p5-label">Description *</label><textarea className="p5-input" rows={4} value={data.description} onChange={e=>setData('description',e.target.value)} placeholder="Describe the project..." style={{resize:'vertical'}} />{errors.description&&<p style={{color:'var(--p5-red)',fontSize:'0.85rem',marginTop:'0.25rem'}}>{errors.description}</p>}</div>
+                    <div className="p5-admin-card" style={{ display: 'grid', gap: '1.5rem' }}>
+                        {/* Title & Status */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '1.5rem' }}>
+                            <div>
+                                <label className="p5-admin-label">PROJECT TITLE *</label>
+                                <input
+                                    className="p5-admin-input"
+                                    value={data.title}
+                                    onChange={e => setData('title', e.target.value)}
+                                    placeholder="e.g. Cognitive Metaverse Infiltration App"
+                                    required
+                                />
+                                {errors.title && <p style={{ color: 'var(--p5-red)', fontSize: '0.85rem', marginTop: '0.3rem', fontWeight: 'bold' }}>{errors.title}</p>}
+                            </div>
+
+                            <div>
+                                <P5Select
+                                    label="TARGET STATUS"
+                                    value={data.status}
+                                    onChange={e => setData('status', e.target.value)}
+                                    options={[
+                                        { value: 'active', label: 'In Progress' },
+                                        { value: 'archived', label: 'Finished' },
+                                    ]}
+                                    error={errors.status}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Description */}
                         <div>
-                            <label className="p5-label">Tech Stack</label>
-                            <div style={{display:'flex',gap:'0.5rem'}}>
-                                <input className="p5-input" style={{flex:1}} value={techInput} onChange={e=>setTechInput(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();addTech();}}} placeholder="e.g. Laravel..." />
-                                <button type="button" onClick={addTech} className="p5-btn p5-btn-sm">+ Add</button>
+                            <label className="p5-admin-label">DESCRIPTION *</label>
+                            <textarea
+                                className="p5-admin-input"
+                                rows={4}
+                                value={data.description}
+                                onChange={e => setData('description', e.target.value)}
+                                placeholder="Describe project missions, technical specifications, and key features..."
+                                style={{ resize: 'vertical' }}
+                                required
+                            />
+                            {errors.description && <p style={{ color: 'var(--p5-red)', fontSize: '0.85rem', marginTop: '0.3rem', fontWeight: 'bold' }}>{errors.description}</p>}
+                        </div>
+
+                        {/* Tech Stack */}
+                        <div>
+                            <label className="p5-admin-label">TECH STACK</label>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <input
+                                    className="p5-admin-input"
+                                    style={{ flex: 1 }}
+                                    value={techInput}
+                                    onChange={e => setTechInput(e.target.value)}
+                                    onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addTech(); } }}
+                                    placeholder="Add tech... (Press Enter or + Add)"
+                                />
+                                <button type="button" onClick={addTech} className="p5-admin-btn-primary" style={{ padding: '0.4rem 1.2rem', fontSize: '0.9rem' }}>
+                                    + ADD
+                                </button>
                             </div>
-                            <div style={{display:'flex',gap:'0.5rem',flexWrap:'wrap',marginTop:'0.75rem'}}>
-                                {data.tech_stack.map(t=><span key={t} className="p5-badge" style={{cursor:'pointer'}} onClick={()=>removeTech(t)}>{t} ×</span>)}
+                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
+                                {data.tech_stack.map(t => (
+                                    <span
+                                        key={t}
+                                        style={{ background: '#000', border: '1px solid #fff', color: '#fff', padding: '3px 10px', fontSize: '0.8rem', fontFamily: 'var(--font-p5-menu)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                                        onClick={() => removeTech(t)}
+                                    >
+                                        {t} <span style={{ color: 'var(--p5-red)', fontWeight: 'bold' }}>×</span>
+                                    </span>
+                                ))}
                             </div>
                         </div>
-                        <div><label className="p5-label">Image URL</label><input className="p5-input" value={data.image_url} onChange={e=>setData('image_url',e.target.value)} placeholder="https://..." /></div>
-                        <div><label className="p5-label">Or Upload Image</label><input type="file" accept="image/*" className="p5-input" style={{padding:'0.4rem',cursor:'pointer'}} onChange={e=>setData('image_file',e.target.files[0])} /></div>
-                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
-                            <div><label className="p5-label">Repository URL</label><input className="p5-input" value={data.repo_url} onChange={e=>setData('repo_url',e.target.value)} placeholder="https://github.com/..." /></div>
-                            <div><label className="p5-label">Live URL</label><input className="p5-input" value={data.live_url} onChange={e=>setData('live_url',e.target.value)} placeholder="https://..." /></div>
+
+                        {/* Visual Asset (URL & Custom File Upload) */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.2fr)', gap: '1.5rem', alignItems: 'start' }}>
+                            <div>
+                                <label className="p5-admin-label">IMAGE URL (OPTIONAL)</label>
+                                <input
+                                    className="p5-admin-input"
+                                    value={data.image_url}
+                                    onChange={e => setData('image_url', e.target.value)}
+                                    placeholder="https://images.unsplash.com/..."
+                                />
+                                <p style={{ color: '#888', fontSize: '0.8rem', marginTop: '0.4rem' }}>
+                                    Gunakan URL eksternal jika gambar dihosting di tempat lain.
+                                </p>
+                            </div>
+                            <div>
+                                <P5ImageUpload
+                                    label="OR UPLOAD VISUAL ASSET (RECOMMENDED)"
+                                    file={data.image_file}
+                                    onFileChange={file => setData('image_file', file)}
+                                    error={errors.image_file}
+                                />
+                            </div>
                         </div>
-                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem'}}>
-                            <div><label className="p5-label">Status</label><select className="p5-input" value={data.status} onChange={e=>setData('status',e.target.value)}><option value="active">Active</option><option value="archived">Archived</option></select></div>
-                            <div><label className="p5-label">Display Order</label><input className="p5-input" type="number" value={data.order} onChange={e=>setData('order',parseInt(e.target.value)||0)} min="0" /></div>
+
+                        {/* Live Preview Checkbox Toggle & URL */}
+                        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.15)', padding: '1.2rem' }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer', fontFamily: 'var(--font-p5-menu)', fontSize: '1.05rem', color: '#fff' }}>
+                                <input
+                                    type="checkbox"
+                                    checked={hasLivePreview}
+                                    onChange={e => {
+                                        const val = e.target.checked;
+                                        setHasLivePreview(val);
+                                        if (!val) setData('live_url', '');
+                                    }}
+                                    style={{ width: '20px', height: '20px', accentColor: 'var(--p5-red)', cursor: 'pointer' }}
+                                />
+                                <span>ENABLE LIVE PREVIEW // ADA LIVE DEMO (TAMPILKAN TOMBOL LIVE PREVIEW)</span>
+                            </label>
+
+                            {hasLivePreview && (
+                                <div style={{ marginTop: '1rem', paddingLeft: '1.8rem' }}>
+                                    <label className="p5-admin-label">LIVE PREVIEW URL *</label>
+                                    <input
+                                        className="p5-admin-input"
+                                        value={data.live_url}
+                                        onChange={e => setData('live_url', e.target.value)}
+                                        placeholder="https://my-live-project.com"
+                                        required={hasLivePreview}
+                                    />
+                                    <p style={{ color: '#aaa', fontSize: '0.8rem', marginTop: '0.3rem' }}>
+                                        Pengunjung akan melihat tombol <strong>"LIVE PREVIEW ↗"</strong> yang langsung membuka link aplikasi ini.
+                                    </p>
+                                    {errors.live_url && <p style={{ color: 'var(--p5-red)', fontSize: '0.85rem', marginTop: '0.25rem' }}>{errors.live_url}</p>}
+                                </div>
+                            )}
                         </div>
-                        <div style={{display:'flex',gap:'1rem'}}>
-                            <button type="submit" disabled={processing} className="p5-btn">{processing?'Creating...':'◈ Create Project'}</button>
-                            <Link href="/admin/projects" className="p5-btn p5-btn-outline">Cancel</Link>
+
+                        {/* GitHub / Repo URL */}
+                        <div>
+                            <label className="p5-admin-label">GITHUB / REPOSITORY URL</label>
+                            <input
+                                className="p5-admin-input"
+                                value={data.repo_url}
+                                onChange={e => setData('repo_url', e.target.value)}
+                                placeholder="https://github.com/username/project-repo"
+                            />
+                            <p style={{ color: '#aaa', fontSize: '0.8rem', marginTop: '0.3rem' }}>
+                                Tautan ke repositori source code (akan menampilkan tombol <strong>"GITHUB / REPO ↗"</strong> ke pengunjung).
+                            </p>
+                            {errors.repo_url && <p style={{ color: 'var(--p5-red)', fontSize: '0.85rem', marginTop: '0.25rem' }}>{errors.repo_url}</p>}
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', borderTop: '2px solid #222', paddingTop: '1.5rem' }}>
+                            <button type="submit" disabled={processing} className="p5-admin-btn-primary">
+                                {processing ? 'REGISTERING...' : '◈ REGISTER PROJECT'}
+                            </button>
+                            <Link href="/admin/projects" className="p5-admin-btn-outline">
+                                CANCEL
+                            </Link>
                         </div>
                     </div>
                 </form>

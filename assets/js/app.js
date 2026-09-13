@@ -145,14 +145,35 @@ class PhansiteApp {
       if (certificates.length === 0) {
         certGrid.innerHTML = '<div class="p5-empty-state" style="grid-column: 1 / -1;"><div class="empty-state-text">NO CERTIFICATES RECORDED.</div></div>';
       } else {
-        certGrid.innerHTML = certificates.map(cert => `
-          <div class="tarot-cert-card">
-            <div class="tarot-arcana-badge">TAROT // ${this.escapeHtml(cert.arcana || 'STAR')}</div>
-            <h4 class="tarot-title">${this.escapeHtml(cert.title)}</h4>
-            <div class="tarot-issuer">${this.escapeHtml(cert.issuer)} &bull; ${this.escapeHtml(cert.year)}</div>
-            ${cert.credentialUrl ? `<a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" class="btn-target-action" style="display: block; margin-top: 0.8rem; font-size: 0.95rem;">VERIFY CREDENTIAL ↗</a>` : ''}
+        certGrid.innerHTML = certificates.map((cert, index) => {
+          const imageSrc = cert.image || cert.imageUrl || '/assets/img/p5_certificate_sample.webp';
+          return `
+          <div class="tarot-cert-card tarot-cert-interactive" onclick="phansiteApp.openCertificateModal(window.phansiteStore.getCertificates()[${index}])" style="cursor: pointer; position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; min-height: 440px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                <div class="tarot-arcana-badge" style="margin: 0; font-size: 1.3rem;">TAROT // ${this.escapeHtml(cert.arcana || 'STAR')}</div>
+              </div>
+              <div class="cert-card-thumb-wrap" style="position: relative; width: 100%; height: 260px; overflow: hidden; margin-bottom: 1.2rem; border: 3px solid #2a2a2a; background: #0c0c0e; display: flex; align-items: center; justify-content: center;">
+                <img src="${this.escapeHtml(imageSrc)}" alt="${this.escapeHtml(cert.title)}" class="cert-thumb-img" style="width: 100%; height: 100%; object-fit: contain; background: #000; transition: transform 0.35s ease;">
+              </div>
+              <h4 class="tarot-title" style="margin: 0.4rem 0; text-align: left; font-size: 1.5rem; line-height: 1.25;">${this.escapeHtml(cert.title)}</h4>
+              <div class="tarot-issuer" style="text-align: left; font-size: 1rem; font-weight: bold; color: var(--p5-yellow); margin-bottom: 0.6rem;">${this.escapeHtml(cert.issuer)} &bull; ${this.escapeHtml(cert.year)}</div>
+              ${cert.description ? `
+                <div class="p5-dialog-chatbox" style="position: relative; background-color: #ffffff; border: 3px solid #000000; box-shadow: 5px 5px 0 var(--p5-red); transform: skewX(-3deg); padding: 1rem 1.2rem 0.9rem; margin-top: 1.2rem; color: #000000;">
+                  <div style="position: absolute; top: -11px; left: 10px; background-color: #000000; color: #ffffff; padding: 0.1rem 0.55rem; font-family: var(--font-p5-menu); font-size: 0.8rem; letter-spacing: 1px; transform: skewX(-3deg); border: 1px solid var(--p5-red); user-select: none;">RECORD // 記録</div>
+                  <p style="font-family: var(--font-p5-sans); font-size: 0.95rem; font-weight: 700; color: #000000; line-height: 1.45; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${this.escapeHtml(cert.description)}</p>
+                  <span style="position: absolute; bottom: 4px; right: 8px; color: var(--p5-red); font-size: 0.8rem; animation: pulse 1s infinite alternate; user-select: none; font-weight: bold;">▼</span>
+                </div>
+              ` : ''}
+            </div>
+            ${cert.credentialUrl ? `
+            <div style="margin-top: 1.2rem; display: flex; justify-content: flex-end;">
+              <a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" class="btn-target-action" onclick="event.stopPropagation();" style="font-size: 0.85rem; padding: 0.4rem 1rem;">VERIFY CREDENTIAL ↗</a>
+            </div>
+            ` : ''}
           </div>
-        `).join('');
+        `;
+        }).join('');
       }
     }
 
@@ -160,7 +181,7 @@ class PhansiteApp {
   }
 
   // --- CALLING CARD FORM SUBMISSION & ANIMATION ---
-  handleCallingCardSubmit(e) {
+  async handleCallingCardSubmit(e) {
     e.preventDefault();
     const name = document.getElementById('card-sender-name')?.value.trim();
     const email = document.getElementById('card-sender-email')?.value.trim();
@@ -181,7 +202,35 @@ class PhansiteApp {
 
     setTimeout(() => flyingCard.remove(), 1800);
 
-    this.showToast(`CALLING CARD DISPATCHED BY ${name.toUpperCase()}! THE THIEVES WILL RESPOND.`, 'success');
+    // Send to Discord Webhook
+    const webhookUrl = 'https://ptb.discord.com/api/webhooks/1548594955159736400/Q-DSMtcFuk1rr6Jv8t8FgVTboqaiDSLNNbmeKquVj7dYjhM-sR4ShqzcXbs9fI9g8kdf';
+    try {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: 'Phantom Aficionado Dispatch',
+          avatar_url: 'https://raw.githubusercontent.com/Bimakanz/Phansite/main/assets/img/p5_tophat.png',
+          content: '🚨 **A NEW CALLING CARD HAS BEEN DISPATCHED!** @here',
+          embeds: [{
+            title: '★ [CALLING CARD] INCOMING TRANSMISSION / HR INQUIRY',
+            description: 'A decree / message has been transmitted via the Phansite Contact Terminal for **Bimakanz**!',
+            color: 15073298,
+            fields: [
+              { name: '👤 SENDER / HR / ALIAS', value: '**' + name + '**', inline: true },
+              { name: '📧 FREQUENCY (EMAIL)', value: '`' + email + '`', inline: true },
+              { name: '📜 THE DECREE (MESSAGE)', value: '```\n' + message + '\n```', inline: false }
+            ],
+            footer: { text: 'PHANTOM AFICIONADO • COGNITIVE CMS DISPATCH' },
+            timestamp: new Date().toISOString()
+          }]
+        })
+      }).catch(err => console.warn('Discord webhook notice:', err));
+    } catch (err) {
+      console.warn('Webhook dispatch error:', err);
+    }
+
+    this.showToast(`CALLING CARD TRANSMITTED TO BIMAKANZ VIA DISCORD!`, 'success');
 
     // Reset Form
     document.getElementById('calling-card-form')?.reset();
@@ -190,39 +239,12 @@ class PhansiteApp {
   // --- STEAL RESUME DOWNLOAD ---
   downloadResume() {
     if (window.phansiteAudio) window.phansiteAudio.playSfx('select');
-    this.showToast('STEALING RESUME... DECRYPTING METAVERSE PAYLOAD!', 'success');
+    this.showToast('STEALING CV... ACQUIRING METAVERSE PAYLOAD!', 'success');
 
-    const resumeMarkdown = `# BIMASENA // FULL-STACK SOFTWARE ENGINEER & COGNITIVE CRAFTSMAN
-Contact: bimasena@shibuya.io | GitHub: github.com/bimasena | Portfolio: Phansite
-
-## EXECUTIVE SUMMARY
-Lead Full-Stack Software Engineer with specialized mastery in React.js, Next.js, Tailwind CSS, Laravel, and resilient cloud architecture. Proven track record of architecting high-performance web systems with striking, uncompromising UI/UX design.
-
-## CORE PARAMETERS & TECHNICAL SKILLS
-- Frontend: React.js, Next.js, TypeScript, JavaScript (ES6+), Tailwind CSS, Neo-Brutalist Architecture, Web Audio API.
-- Backend: Laravel, Node.js, Express.js, RESTful API Architecture, PostgreSQL, MySQL, Redis.
-- Engineering & DevOps: Git, GitHub CI/CD, Vite, Docker, Unit/Integration Testing, Lighthouse Optimization (99+).
-- Design & UI/UX: Persona 5 Thematic Design Systems, Figma Prototyping, Motion Choreography.
-
-## FEATURED MISSIONS (PROJECTS)
-1. Metaverse Nexus E-Commerce (Next.js, Tailwind, Stripe, PostgreSQL)
-2. Cognitive Palace Task Manager (Laravel, Vue.js, Redis, WebSockets)
-3. Phantom Aficionado Synthesizer (Vanilla ES6, Web Audio API, Canvas)
-
-## CONFIDANT EXPERIENCE
-- Lead Full-Stack Infiltrator @ Phantom Studio Lab (2024 - Present)
-- Frontend Software Craftsman @ Cognitive Systems Corp (2022 - 2024)
-- Web Development Specialist @ Shibuya Creative Tech (2021 - 2022)
-
----
-Generated directly from the Persona 5 Phansite Cognitive Engine.
-`;
-
-    const blob = new Blob([resumeMarkdown], { type: 'text/markdown;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Bimasena_FullStack_Resume.md';
+    a.href = 'CV_BIMASENA.pdf';
+    a.download = 'CV_BIMASENA.pdf';
+    a.target = '_blank';
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -285,6 +307,91 @@ Generated directly from the Persona 5 Phansite Cognitive Engine.
         });
       }
     });
+  }
+
+  openCertificateModal(cert) {
+    if (!cert) return;
+    if (window.phansiteAudio) window.phansiteAudio.playSfx('select');
+    let modal = document.getElementById('cert-detail-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'cert-detail-modal';
+      modal.className = 'p5-modal-overlay is-hidden';
+      modal.innerHTML = `
+        <div class="p5-modal-backdrop" onclick="phansiteApp.closeCertificateModal()"></div>
+        <div class="p5-modal-dialog" style="max-width: 850px; background: #0a0a0c; border: 4px solid #ffffff; box-shadow: 12px 12px 0 var(--p5-red); transform: skewX(-2deg); overflow: hidden;">
+          <div style="background: var(--p5-red); color: #000; padding: 0.8rem 1.2rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-p5-menu);">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <span id="cert-modal-arcana" style="background: #000; color: #fff; padding: 0.2rem 0.5rem; font-size: 0.85rem;">TAROT // STAR</span>
+              <span style="font-size: 1.1rem; color: #fff;">CERTIFICATION SPECIMEN</span>
+            </div>
+            <button type="button" onclick="phansiteApp.closeCertificateModal()" onmouseenter="window.phansiteAudio && window.phansiteAudio.playSfx('hover')" class="p5-modal-close-btn">✕ CLOSE (ESC)</button>
+          </div>
+          <div style="padding: 1.5rem; overflow-y: auto; max-height: 80vh; display: flex; flex-direction: column; gap: 1.2rem; color: #fff;">
+            <div style="background: #000; border: 3px solid #ffffff; box-shadow: 6px 6px 0 var(--p5-red); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 2px;">
+              <img id="cert-modal-img" src="/assets/img/p5_certificate_sample.webp" alt="Certificate" style="max-width: 100%; max-height: 56vh; object-fit: contain; display: block;" />
+            </div>
+            <div>
+              <h3 id="cert-modal-title" style="font-family: var(--font-p5-menu); font-size: 1.6rem; color: #fff; margin: 0 0 0.4rem;"></h3>
+              <div id="cert-modal-issuer" style="color: var(--p5-yellow); font-family: var(--font-p5-sans); font-size: 0.95rem; font-weight: bold;"></div>
+              <div id="cert-modal-desc-wrap" class="p5-dialog-chatbox" style="position: relative; background-color: #ffffff; border: 3px solid #000000; box-shadow: 6px 6px 0 var(--p5-red); transform: skewX(-3deg); padding: 1.2rem 1.4rem 1rem; margin-top: 1.2rem; color: #000000; display: none;">
+                <div style="position: absolute; top: -12px; left: 12px; background-color: #000000; color: #ffffff; padding: 0.15rem 0.65rem; font-family: var(--font-p5-menu); font-size: 0.85rem; letter-spacing: 1px; transform: skewX(-3deg); border: 1.5px solid var(--p5-red); user-select: none;">CONFIDANT ARCHIVE // 記録</div>
+                <p id="cert-modal-desc" style="font-family: var(--font-p5-sans); font-size: 1rem; font-weight: 700; color: #000000; line-height: 1.6; margin: 0;"></p>
+                <span style="position: absolute; bottom: 6px; right: 10px; color: var(--p5-red); font-size: 0.9rem; animation: pulse 1s infinite alternate; user-select: none; font-weight: bold;">▼</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #333; padding-top: 0.8rem;">
+              <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                <a id="cert-modal-cred-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-target-action" style="display: none; font-size: 0.9rem; padding: 0.5rem 1.2rem;">VERIFY CREDENTIAL ↗</a>
+                <a id="cert-modal-full-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-p5-cancel" style="font-size: 0.9rem; padding: 0.5rem 1.2rem; text-decoration: none;">OPEN FULL IMAGE ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    const imageSrc = cert.image || cert.imageUrl || '/assets/img/p5_certificate_sample.webp';
+    const arcanaEl = document.getElementById('cert-modal-arcana');
+    if (arcanaEl) arcanaEl.textContent = `TAROT // ${cert.arcana || 'STAR'}`;
+    const titleEl = document.getElementById('cert-modal-title');
+    if (titleEl) titleEl.textContent = cert.title || '';
+    const issuerEl = document.getElementById('cert-modal-issuer');
+    if (issuerEl) issuerEl.textContent = ` ${cert.issuer || 'Phantom Academy'} •  ${cert.year || '2025'}`;
+    const imgEl = document.getElementById('cert-modal-img');
+    if (imgEl) imgEl.src = imageSrc;
+    const fullBtn = document.getElementById('cert-modal-full-btn');
+    if (fullBtn) fullBtn.href = imageSrc;
+
+    const descWrap = document.getElementById('cert-modal-desc-wrap');
+    const descEl = document.getElementById('cert-modal-desc');
+    if (descEl && descWrap) {
+      if (cert.description) {
+        descEl.textContent = cert.description;
+        descWrap.style.display = 'block';
+      } else {
+        descWrap.style.display = 'none';
+      }
+    }
+
+    const credBtn = document.getElementById('cert-modal-cred-btn');
+    if (credBtn) {
+      if (cert.credentialUrl) {
+        credBtn.href = cert.credentialUrl;
+        credBtn.style.display = 'inline-block';
+      } else {
+        credBtn.style.display = 'none';
+      }
+    }
+
+    modal.classList.remove('is-hidden');
+  }
+
+  closeCertificateModal() {
+    if (window.phansiteAudio) window.phansiteAudio.playSfx('click');
+    const modal = document.getElementById('cert-detail-modal');
+    if (modal) modal.classList.add('is-hidden');
   }
 
   openSettingsModal() {

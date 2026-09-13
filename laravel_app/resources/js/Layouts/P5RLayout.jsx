@@ -203,10 +203,10 @@ export default function P5RLayout({ children }) {
             {/* ── FLOATING MUSIC BOX ───────────────────────────────────── */}
             <aside className={`figma-p5-music-box ${isPlaying ? 'is-playing' : ''} ${isMinimized ? 'is-minimized' : ''}`} id="floating-music-player">
                 <div className="music-box-frame">
-                    <img src="/assets/img/p5_music_banner_only.png" alt="Persona 5 OST Music Player" className="music-box-bg" />
+                    <img src="/assets/img/p5_music_banner_only.webp" alt="Persona 5 OST Music Player" className="music-box-bg" />
 
                     <div className={`music-box-album-wrap ${isSpinning ? 'is-spinning' : ''}`} id="music-box-album-wrap" onAnimationEnd={() => setIsSpinning(false)}>
-                        <img src="/assets/img/p5_music_album_art.png" alt="Album Art" className="music-box-album-art" />
+                        <img src="/assets/img/p5_music_album_art.webp" alt="Album Art" className="music-box-album-art" />
                     </div>
 
                     <button className="music-box-mini-toggle" id="music-box-mini-toggle" onClick={toggleMiniPlayer} title="Minimize / Expand Player">

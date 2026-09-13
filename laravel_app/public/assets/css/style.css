@@ -2377,25 +2377,40 @@ body {
 
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+
+@media (max-width: 820px) {
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .tarot-cert-card {
   background: #000000;
   border: 3px solid #ffffff;
   padding: 1.5rem;
-  text-align: center;
+  text-align: left;
   transform: skewX(-3deg);
   box-shadow: 4px 4px 0 #000000;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tarot-cert-card:hover {
-  border-color: var(--p5-yellow);
-  box-shadow: 6px 6px 0 var(--p5-yellow);
-  transform: skewX(-3deg) translateY(-4px);
+.tarot-cert-interactive {
+  cursor: pointer;
+}
+
+.tarot-cert-interactive:hover {
+  border-color: var(--p5-red);
+  box-shadow: 8px 8px 0 #ffffff;
+  transform: skewX(-3deg) translateY(-6px);
+}
+
+.tarot-cert-interactive:hover .cert-thumb-img {
+  transform: scale(1.02);
 }
 
 .tarot-arcana-badge {
@@ -2417,6 +2432,72 @@ body {
   font-size: 0.9rem;
   color: #aaaaaa;
   margin-bottom: 0.8rem;
+}
+
+/* Persona 5 Dialogue Chatbox */
+.p5-dialog-chatbox {
+  position: relative;
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0 var(--p5-red);
+  transform: skewX(-3deg);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.p5-dialog-chatbox:hover {
+  transform: skewX(-3deg) translateY(-2px);
+  box-shadow: 7px 7px 0 #000000;
+}
+
+/* Modal Close ESC Button Hover Animation */
+.p5-modal-close-btn {
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  font-family: var(--font-p5-sans);
+  font-weight: 900;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transform: skewX(4deg);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.p5-modal-close-btn:hover {
+  background: #ffffff;
+  color: var(--p5-red);
+  border-color: #000000;
+  box-shadow: 4px 4px 0 #000000, 6px 6px 0 #ffffff;
+  transform: skewX(4deg) scale(1.12) translateY(-2px);
+}
+
+.p5-modal-close-btn:active {
+  transform: skewX(4deg) scale(0.95) translateY(1px);
+  box-shadow: 2px 2px 0 #000000;
+}
+
+/* Hide Floating Music Box Player when any modal is open */
+body.modal-open #floating-music-player,
+body:has(.p5-cert-modal-backdrop) #floating-music-player,
+body:has(.p5-project-modal-backdrop) #floating-music-player,
+body:has(.p5-modal-overlay:not(.is-hidden)) #floating-music-player,
+body.modal-open .figma-p5-music-box,
+body:has(.p5-cert-modal-backdrop) .figma-p5-music-box,
+body:has(.p5-project-modal-backdrop) .figma-p5-music-box,
+body:has(.p5-modal-overlay:not(.is-hidden)) .figma-p5-music-box {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.modal-open .p5-header,
+body:has(.p5-cert-modal-backdrop) .p5-header,
+body:has(.p5-project-modal-backdrop) .p5-header {
+  z-index: 10 !important;
 }
 
 /* ==========================================================================
@@ -2794,4 +2875,107 @@ body {
     padding: 0.7rem 0.8rem;
     font-size: 0.9rem;
   }
+}
+
+/* ==========================================================================
+   AUTHENTIC PERSONA 5 CALLING CARD (FIGMA CONCENTRIC TARGET CIRCLES)
+   ========================================================================== */
+.calling-card-outer-wrapper {
+  max-width: 920px;
+  margin: 1.5rem auto 4rem auto;
+  perspective: 1200px;
+}
+
+.calling-card-container {
+  position: relative;
+  background: url('/assets/img/p5_calling_card_bg.png') center / cover no-repeat;
+  border: 6px solid #ffffff;
+  box-shadow: 10px 10px 0 #000000, 22px 22px 0 var(--p5-red), 0 20px 40px rgba(0, 0, 0, 0.8);
+  transform: rotate(-1.2deg) skewX(-1deg);
+  padding: 2.5rem 3rem 4rem 3rem;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.calling-card-container:hover {
+  transform: rotate(0deg) skewX(0deg) scale(1.008);
+  box-shadow: 14px 14px 0 #000000, 26px 26px 0 var(--p5-yellow), 0 25px 50px rgba(0, 0, 0, 0.9);
+}
+
+.calling-card-header {
+  border-bottom: 3px solid #000;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.calling-card-title {
+  font-family: var(--font-p5-menu);
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 3px 3px 0 #000;
+  letter-spacing: 2px;
+}
+
+.calling-card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: rgba(0, 0, 0, 0.84);
+  padding: 2rem;
+  border: 3px solid #fff;
+  box-shadow: 6px 6px 0 #000;
+}
+
+.calling-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.calling-input-label {
+  font-family: var(--font-p5-menu);
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.calling-input-field {
+  background: #fff;
+  border: 3px solid #000;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-p5-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #000;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.calling-input-field:focus {
+  border-color: var(--p5-red);
+  box-shadow: 4px 4px 0 var(--p5-red);
+}
+
+.btn-send-calling-card {
+  background: var(--p5-red);
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 5px 5px 0 #000;
+  font-family: var(--font-p5-menu);
+  font-size: 1.5rem;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 2px;
+  transform: skewX(-4deg);
+  transition: all 0.15s;
+}
+
+.btn-send-calling-card:hover {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 7px 7px 0 var(--p5-red);
+  transform: skewX(-4deg) translateY(-2px);
 }
