@@ -32,8 +32,8 @@
         <!-- Schema.org JSON-LD Structured Data for Google -->
         <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'Person',
+            chr(64) . 'context' => 'https://schema.org',
+            chr(64) . 'type' => 'Person',
             'name' => 'Bimasena',
             'alternateName' => 'Phantom Aficionado',
             'url' => url('/'),

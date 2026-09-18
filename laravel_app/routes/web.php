@@ -36,19 +36,6 @@ Route::get('/contact', function (\Illuminate\Http\Request $request) {
 })->name('contact');
 Route::post('/contact', [CallingCardController::class, 'store'])->name('contact.send');
 
-Route::get('/debug-error', function (\Illuminate\Http\Request $request) {
-    try {
-        $controller = new \App\Http\Controllers\HomeController();
-        return $controller->index($request);
-    } catch (\Throwable $e) {
-        return response()->json([
-            'error' => $e->getMessage(),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-        ], 200);
-    }
-});
-
 // ─── Dynamic SEO Sitemap ──────────────────────────────────────────────────
 Route::get('/sitemap.xml', function () {
     if (ob_get_length()) {
