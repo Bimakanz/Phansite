@@ -150,7 +150,10 @@ export default function Contact({ remainingQuota = 3 }) {
 
     return (
         <P5RLayout>
-            <Head title="Contact — PHANSITE // Persona 5 Calling Card" />
+            <Head>
+                <title>Dispatch Calling Card (Contact) — Persona 5 Portfolio // PHANSITE</title>
+                <meta name="description" content="Dispatch a Persona 5 Calling Card to get in touch with Bimasena for software engineering, web development opportunities, or collaborations." />
+            </Head>
 
             <section id="section-contact" className="app-section">
                 <div className="section-header-row">

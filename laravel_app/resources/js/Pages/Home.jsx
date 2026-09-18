@@ -287,10 +287,15 @@ export default function HomePage({ latestProjects = [], pollData = {}, initialCo
             )}
 
             <P5RLayout>
-                <Head title="PHANSITE // Phantom Aficionado Website - Persona 5" />
+                <Head>
+                    <title>PHANSITE — Persona 5 Portfolio | Bimasena Full-Stack Developer</title>
+                    <meta name="description" content="PHANSITE: An interactive Persona 5 Royal inspired developer portfolio and metaverse platform by Bimasena. Featuring full-stack web applications, reactive architecture, and Neo-Brutalist UI/UX." />
+                    <meta name="keywords" content="Persona 5 Portfolio, Persona 5 Portofolio, Persona 5 Website, Phansite, Phantom Aficionado, Bimasena, Persona 5 Web, Full Stack Developer" />
+                    <meta property="og:title" content="PHANSITE — Persona 5 Portfolio | Bimasena" />
+                    <meta property="og:description" content="Stealing hearts through high-performance web applications and bespoke Persona 5 Neo-Brutalist design." />
+                </Head>
 
                 <section id="section-home" className="app-section">
-
                     {/* Hero Banner */}
                     <div className="portfolio-hero-banner">
                         <div className="hero-banner-inner">

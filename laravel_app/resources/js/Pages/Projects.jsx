@@ -138,7 +138,10 @@ export default function Projects({ projects = [] }) {
 
     return (
         <P5RLayout>
-            <Head title="Projects — PHANSITE // Phantom Aficionado" />
+            <Head>
+                <title>Projects (Palaces) — Persona 5 Portfolio // PHANSITE</title>
+                <meta name="description" content="Explore web applications, architectures, and creative coding missions crafted by Bimasena with Persona 5 Neo-Brutalist UI." />
+            </Head>
 
             <section id="section-projects" className="app-section">
                 <div className="projects-header-bar">

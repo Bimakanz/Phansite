@@ -1,4 +1,4 @@
-﻿import { Head } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import P5RLayout from '@/Layouts/P5RLayout';
 
 export default function About() {
@@ -19,7 +19,10 @@ export default function About() {
 
     return (
         <P5RLayout>
-            <Head title="About — PHANSITE // Phantom Aficionado" />
+            <Head>
+                <title>About (Parameters) — Persona 5 Portfolio // PHANSITE</title>
+                <meta name="description" content="Discover Bimasena's background, core proficiencies, technical stack, and software engineering philosophy." />
+            </Head>
 
             <section id="section-about" className="app-section">
                 <div className="section-header-row">

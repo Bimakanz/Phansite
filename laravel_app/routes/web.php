@@ -36,6 +36,32 @@ Route::get('/contact', function (\Illuminate\Http\Request $request) {
 })->name('contact');
 Route::post('/contact', [CallingCardController::class, 'store'])->name('contact.send');
 
+// ─── Dynamic SEO Sitemap ──────────────────────────────────────────────────
+Route::get('/sitemap.xml', function () {
+    $baseUrl = rtrim(url('/'), '/');
+    $pages = [
+        ['loc' => $baseUrl, 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => $baseUrl . '/projects', 'priority' => '0.9', 'changefreq' => 'weekly'],
+        ['loc' => $baseUrl . '/experience', 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => $baseUrl . '/about', 'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => $baseUrl . '/contact', 'priority' => '0.7', 'changefreq' => 'monthly'],
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    foreach ($pages as $p) {
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>" . htmlspecialchars($p['loc']) . "</loc>\n";
+        $xml .= "    <lastmod>" . date('Y-m-d') . "</lastmod>\n";
+        $xml .= "    <changefreq>" . $p['changefreq'] . "</changefreq>\n";
+        $xml .= "    <priority>" . $p['priority'] . "</priority>\n";
+        $xml .= "  </url>\n";
+    }
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'application/xml');
+});
+
 // ─── Admin Routes (Auth Protected) ─────────────────────────────────────────
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');

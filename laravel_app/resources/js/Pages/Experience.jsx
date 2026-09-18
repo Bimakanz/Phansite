@@ -262,7 +262,10 @@ export default function Experience({ experiences = [], certificates = [] }) {
 
     return (
         <P5RLayout>
-            <Head title="Experience — PHANSITE // Phantom Aficionado" />
+            <Head>
+                <title>Experience (Confidants) — Persona 5 Portfolio // PHANSITE</title>
+                <meta name="description" content="Professional journey, technical experience, and achievements of Bimasena — Full-Stack Developer." />
+            </Head>
 
             <section id="section-experience" className="app-section">
                 <div className="section-header-row">

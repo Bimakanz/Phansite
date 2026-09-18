@@ -5,7 +5,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'PHANSITE — Persona 5 Portfolio | Bimasena') }}</title>
+
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="PHANSITE: An interactive Persona 5 Royal inspired developer portfolio and metaverse platform by Bimasena. Featuring full-stack web applications, reactive architecture, and Neo-Brutalist UI/UX.">
+        <meta name="keywords" content="Persona 5 Portfolio, Persona 5 Portofolio, Persona 5 Website, Phansite, Phantom Thieves Portfolio, Bimasena Portfolio, Persona 5 Web, Full Stack Developer, Neo-Brutalist Web Design">
+        <meta name="author" content="Bimasena">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="{{ url()->current() }}">
+
+        <!-- Open Graph / Facebook / Discord / LinkedIn -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:site_name" content="PHANSITE // Phantom Aficionado">
+        <meta property="og:title" content="PHANSITE — Persona 5 Portfolio | Bimasena">
+        <meta property="og:description" content="PHANSITE: An interactive Persona 5 Royal inspired developer portfolio by Bimasena. Stealing hearts with high-performance web applications and bespoke reactive UI.">
+        <meta property="og:image" content="{{ asset('assets/img/1_27_overview.webp') }}">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ url()->current() }}">
+        <meta name="twitter:title" content="PHANSITE — Persona 5 Portfolio | Bimasena">
+        <meta name="twitter:description" content="PHANSITE: An interactive Persona 5 Royal inspired developer portfolio by Bimasena. Stealing hearts with high-performance web applications and bespoke reactive UI.">
+        <meta name="twitter:image" content="{{ asset('assets/img/1_27_overview.webp') }}">
+
+        <!-- Schema.org JSON-LD Structured Data for Google -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Bimasena",
+            "alternateName": "Phantom Aficionado",
+            "url": "{{ url('/') }}",
+            "jobTitle": "Full-Stack Developer",
+            "description": "Creator of PHANSITE — an interactive Persona 5 Royal inspired developer portfolio showcasing high-performance web applications.",
+            "knowsAbout": [
+                "Full-Stack Web Development",
+                "Laravel",
+                "React",
+                "Inertia.js",
+                "Persona 5 UI/UX Design",
+                "Neo-Brutalism"
+            ]
+        }
+        </script>
 
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
