@@ -31,23 +31,23 @@
 
         <!-- Schema.org JSON-LD Structured Data for Google -->
         <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Bimasena",
-            "alternateName": "Phantom Aficionado",
-            "url": "{{ url('/') }}",
-            "jobTitle": "Full-Stack Developer",
-            "description": "Creator of PHANSITE — an interactive Persona 5 Royal inspired developer portfolio showcasing high-performance web applications.",
-            "knowsAbout": [
-                "Full-Stack Web Development",
-                "Laravel",
-                "React",
-                "Inertia.js",
-                "Persona 5 UI/UX Design",
-                "Neo-Brutalism"
-            ]
-        }
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            'name' => 'Bimasena',
+            'alternateName' => 'Phantom Aficionado',
+            'url' => url('/'),
+            'jobTitle' => 'Full-Stack Developer',
+            'description' => 'Creator of PHANSITE — an interactive Persona 5 Royal inspired developer portfolio showcasing high-performance web applications.',
+            'knowsAbout' => [
+                'Full-Stack Web Development',
+                'Laravel',
+                'React',
+                'Inertia.js',
+                'Persona 5 UI/UX Design',
+                'Neo-Brutalism',
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
         </script>
 
         <!-- Favicon -->
