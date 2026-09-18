@@ -1,4 +1,4 @@
- <?php
+<?php
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CallingCardController;
@@ -38,6 +38,9 @@ Route::post('/contact', [CallingCardController::class, 'store'])->name('contact.
 
 // ─── Dynamic SEO Sitemap ──────────────────────────────────────────────────
 Route::get('/sitemap.xml', function () {
+    if (ob_get_length()) {
+        ob_clean();
+    }
     $baseUrl = rtrim(url('/'), '/');
     $pages = [
         ['loc' => $baseUrl, 'priority' => '1.0', 'changefreq' => 'weekly'],

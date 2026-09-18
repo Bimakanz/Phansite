@@ -5,4 +5,4 @@ Disallow: /login
 Disallow: /register
 Disallow: /password/
 
-Sitemap: /sitemap.xml
+Sitemap: https://phansite.up.railway.app/sitemap.xml
