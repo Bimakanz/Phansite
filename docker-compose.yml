@@ -1,0 +1,39 @@
+# Single-container deploy — semua dalam 1 image (FrankenPHP PHP 8.4 + queue worker)
+# Bind 0.0.0.0:8080 agar bisa diakses mesin lain di network yang sama.
+# Limit dihitung untuk project kecil (89MB source) di mesin 4 CPU / 7.8GB RAM.
+services:
+  phansite:
+    build:
+      context: ./laravel_app
+      dockerfile: Dockerfile
+    image: phansite:php8.4-latest
+    container_name: phansite
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:28509:80"
+    env_file:
+      - .env.docker
+    volumes:
+      # Persistensi: DB SQLite + file upload (tahan rebuild/remove container)
+      - sqlite_data:/app/database
+      - uploads_data:/app/storage/app/public
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:80/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  sqlite_data:
+    name: phansite_sqlite
+  uploads_data:
+    name: phansite_uploads
